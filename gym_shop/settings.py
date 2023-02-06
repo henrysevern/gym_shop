@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Allauth requried apps
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # Custom apps
     'store',
 ]
 
@@ -67,6 +74,33 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1 
+
+# We need to temporarily log those emails to the console so we can get the confirmation links.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# account authentication method is what tells allauth that we want to allow authentication using either usernames or emails.
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+# These three email settings here make it so that an email is required to register for the site. 
+# Verifying your email is mandatory so we know users are using a real email. 
+# And they're gonna be required to enter their email twice on the registration page to make sure that they haven't made any typos.
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# We're setting a minimum username length of four characters.
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+# specifying a login url and a url to redirect back to after logging in.
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'gym_shop.wsgi.application'
 
