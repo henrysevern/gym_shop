@@ -28,8 +28,8 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
-    # Allows the page to load without error if the item contains no image
 
+    # Allows the page to load without error if the item contains no image
     @property
     def imageURL(self):
         try:
@@ -52,6 +52,20 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    # Gets the cart total for the cart and checkout page
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+    
+    # Gets the item total for the cart and checkout page
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
 
 class OrderItem(models.Model):
     """
@@ -63,6 +77,12 @@ class OrderItem(models.Model):
                               null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    # Gets the total for to quantity of products in the cart
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
 
 
 class ShippingAddress(models.Model):
