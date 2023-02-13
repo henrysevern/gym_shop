@@ -58,7 +58,7 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
         return total
-    
+
     # Gets the item total for the cart and checkout page
     @property
     def get_cart_items(self):
