@@ -4,15 +4,24 @@ from .models import *
 
 
 def item_list(request):
-    items = Item.objects.all()
+    products = Product.objects.all()
     context = {
-        'items': items
+        'products': products
     }
     return render(request, "store/item_list.html", context)
 
 
 def cart(request):
-    context = {}
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+    context = {
+        'items': items
+    }
     return render(request, "store/cart.html", context)
 
 

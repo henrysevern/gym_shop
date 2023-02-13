@@ -18,7 +18,7 @@ class Customer(models.Model):
         return self.name
 
 
-class Item(models.Model):
+class Product(models.Model):
     """
     Items model
     """
@@ -57,7 +57,7 @@ class OrderItem(models.Model):
     """
     Order item model
     """
-    product = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True,
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True,
                                 null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True,
                               null=True)
