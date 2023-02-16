@@ -5,6 +5,7 @@
     <div class="col-lg-6">
         <div class="box-element" id="form-wrapper">
             <form id="form">
+                {% csrf_token %}
                 <div id="user-info">
                     <div class="form-field">
                         <input required class="form-control" type="text" name="name" placeholder="Name..">
@@ -70,7 +71,7 @@
 </div>
 <script type="text/javascript">
     var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total|floatformat:2}}'
+    var total = '{{order.get_cart_total}}'
 
     if(shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
@@ -87,6 +88,9 @@
     }
     // Gets the payment button displayed once the form has been filled, removes submit form button 
     var form = document.getElementById('form')
+
+    // var csrftoken = form.getElementsByTagName("input")[0].value
+
 	form.addEventListener('submit', function(e){
 		e.preventDefault()
 		console.log('Form submitted...')
@@ -128,17 +132,18 @@
         }
 
         var url = '/process_order/'
-    fetch(url, {
+        fetch(url, {
         method: 'POST',
         headers:{
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken
         },
         body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log('Sucess', data);
+        })
+        
+        .then((response) => response.json())
+        .then((data) => {
+        console.log('Success', data);
         alert('Transaction completed');
         window.location.href = "{% url 'item_list' %}"
     })
