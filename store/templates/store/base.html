@@ -38,7 +38,67 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <header class="container-fluid fixed-top bg-light">
+    <div class="row">
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+        <a href="{% url 'item_list' %}" class="nav-link main-logo-link">
+          <h2 class="logo-font text-black my-0">Gym Shop</h2>
+        </a>
+      </div>
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+        <form method="GET" action="">
+          <div class="input-group w-100">
+              <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
+              <div class="input-group-append">
+                  <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                      <span class="icon">
+                          <i class="fas fa-search"></i>
+                      </span>
+                  </button>
+              </div>
+          </div>
+      </form>
+      </div>
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+          <li class="list-inline-item dropdown">
+            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="text-center">
+                  <div><i class="fas fa-user fa-lg"></i></div>
+                  <p class="my-0">My Account</p>
+              </div>
+          </a>
+          <div class="dropdown-menu border-0" aria-labelledby="user-options">
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a href="" class="dropdown-item">Product Management</a>
+                {% endif %}
+                <a href="" class="dropdown-item">My Profile</a>
+                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+            {% else %}
+                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+            {% endif %}
+        </div>
+          </li>
+          <li class="list-inline-item">
+            <div class="text-center">
+              <div>
+              <a href="{% url 'cart' %}">
+                <img id="cart-icon" src="{% static 'images/cart.png' %}">
+              </div>
+                <p class="my-0" id="cart-total">0</p>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+      
+
+  </header>
+
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'item_list' %}">Gym Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +108,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'item_list' %}">Store <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'item_list' %}">Store</a>
         </li>
 
       </ul>
@@ -62,7 +122,7 @@
 
       </div>
     </div>
-  </nav>
+  </nav> -->
 
   <div class="container">
     <br>
@@ -89,6 +149,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
     integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
   </script>
+  <!-- Font awsome link -->
+  <script src="https://kit.fontawesome.com/a3c891aa8d.js" crossorigin="anonymous"></script>
   <!-- JS link -->
   <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 
