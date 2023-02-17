@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
+import stripe
 import datetime
 from .models import *
 # from .models import Item
@@ -32,10 +34,12 @@ def cart(request):
 
 
 def checkout(request):
+    # pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,
                                                      complete=False)
+        order.shipping = True
         items = order.orderitem_set.all()
     else:
         items = []
@@ -44,7 +48,8 @@ def checkout(request):
         'items': items,
         'order': order
     }
-    return render(request, "store/checkout.html", context)
+    return render(request, "store/checkout.html",
+                  context)
 
 
 def updateItem(request):
@@ -76,6 +81,9 @@ def updateItem(request):
 
 
 def processOrder(request):
+    print('Data:', request.body)
+    print(request.user.customer, 'user')
+    print(request.user.email, 'email')
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
@@ -83,13 +91,16 @@ def processOrder(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,
                                                      complete=False)
+        print(order, 'orderItem')
         total = float(data['form']['total'])
         order.transaction_id = transaction_id
+        order.shipping = True
 
         if total == order.get_cart_total:
             order.complete = True
         order.save()
-
+        print(order.shipping)
+        
         if order.shipping == True:
             ShippingAddress.objects.create(
                     customer=customer,
@@ -97,7 +108,7 @@ def processOrder(request):
                     address=data['shipping']['address'],
                     city=data['shipping']['city'],
                     postcode=data['shipping']['postcode'],
-                    country=data['shipping']['country'],
+                    county=data['shipping']['country'],
 
             )
 
