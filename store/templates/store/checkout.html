@@ -38,15 +38,36 @@
 
                 <hr>
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-            </form>
+            
         </div>
 
         <br>
         <!-- Button to make payment -->
         <div class="box-element hidden" id="payment-info">
-            <small>Pay Options</small>
-            <button id="make-payment">Make Payment</button>
+            <fieldset class="px-3">
+                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                <!-- A Stripe card element will go here -->
+                <div class="mb-3" id="card-element"></div>
+    
+                <!-- Used to display form errors -->
+                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+            </fieldset>
+            <button id="submit-button" class="btn btn-black rounded-0">
+                <span class="font-weight-bold">Complete Order</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </button>
+            <p class="small text-danger my-0">
+                <span class="icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </span>
+                <span>Your card will be charged <strong>£{{ order.get_cart_total|floatformat:2 }}</strong></span>
+            </p>
+    
         </div>
+    </form>
+            
         
     </div>
     <!-- Order summary section -->
@@ -151,4 +172,4 @@
 
 
 	</script>
-{% endblock content %}
+    {% endblock content %}

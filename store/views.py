@@ -15,6 +15,9 @@ def item_list(request):
     }
     return render(request, "store/item_list.html", context)
 
+def item_view(request):
+    return render(request, "store/item_view.html")
+
 
 def cart(request):
 
@@ -100,7 +103,7 @@ def processOrder(request):
             order.complete = True
         order.save()
         print(order.shipping)
-        
+
         if order.shipping == True:
             ShippingAddress.objects.create(
                     customer=customer,
