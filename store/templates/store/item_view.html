@@ -1,9 +1,87 @@
 {% extends 'store/base.html' %}
 {% load static %}
+
 {% block content %}
-<div class="col-lg-6">
-    <div class="box-element">
-        <h1>this is item view</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+
+            <a class="btn btn-outline-dark" href="{% url 'item_list' %}">&#x2190; Continue Shopping</a>
+            <div class="col-lg-6">
+                <div class="box-element">
+                    <h1>{{ product.title }}</h1>
+
+                    <!--Product Image-->
+
+                    <img class="thumbnail" src="{{ product.imageURL }}">
+                    <div class="box-element product">
+                        <h6><strong>{{product.title}}</strong></h6>
+                        <hr>
+
+                        <button data-product={{product.id}} data-action="add"
+                            class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        <h4 style="display: inline-block; float: right">
+                            <strong>£{{product.price|floatformat:2}}</strong></h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
+<br>
+<div class="box-element">
+   <div>
+    <h3>Description</h3>
+    <hr>
+    <p>{{product.description}}</p>
+   </div>
+</div>
+<br>
+<div class="row box-element">
+    <div class="col-md-8 card mb-4 mt-3" style="overflow: scroll;">
+        <h3>Reviews:</h3>
+        <div class="card-body">
+            <!-- iterate through each comment in comments -->
+            {% for comment in comments %}
+            <div class="comments" style="padding: 10px;">
+                <p class="font-weight-bold">
+                    <!-- The commenter's name goes here. -->
+                    {{ comment.user.username }}
+                    <span class=" text-muted font-weight-normal">
+                        <!-- The comment's created date goes here -->
+                        {{ comment.created_on|date:'N d, Y' }}
+                    </span> wrote:
+                </p>
+                <!-- The body of the comment goes before the | -->
+                {{ comment.body | linebreaks }}
+            </div>
+            <!-- Our for loop ends here -->
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4 card mb-4  mt-3 ">
+        <div class="card-body">
+
+            {% if commented %}
+            <div class="alert alert-success" role="alert">
+                Your comment is awaiting approval
+            </div>
+            {% else %}
+            {% if user.is_authenticated %}
+
+            <h3>Leave a review:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="post" action="{% url 'add_comment' product.id %}"
+                style="margin-top: 1.3em;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-info">Submit</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+    
 {% endblock %}
