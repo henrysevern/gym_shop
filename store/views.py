@@ -1,6 +1,7 @@
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.views.generic import DetailView
 import json
 import stripe
 import datetime
@@ -15,8 +16,13 @@ def item_list(request):
     }
     return render(request, "store/item_list.html", context)
 
-def item_view(request):
-    return render(request, "store/item_view.html")
+
+def item_view(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    context = {
+        "product": product,
+    }
+    return render(request, "store/item_view.html", context)
 
 
 def cart(request):
