@@ -1,12 +1,13 @@
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.generic import DetailView
+from django.contrib import messages
 import json
 import stripe
 import datetime
 from .models import *
-# from .models import Item
+from .forms import CommentForm
 
 
 def item_list(request):
@@ -19,10 +20,30 @@ def item_list(request):
 
 def item_view(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
+    comments = Comment.objects.filter(product=product, approved=True)
+    form = CommentForm(request.POST or None)
     context = {
-        "product": product,
+        'product': product,
+        'comments': comments,
+        "form": form,
     }
     return render(request, "store/item_view.html", context)
+
+
+def add_comment(request, product_id):
+    """
+    Function for user to add comments
+    """
+    product = get_object_or_404(Product, id=product_id)
+    form = CommentForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save(commit=False)
+            form.instance.recipe = product
+            form.instance.user = request.user
+            form.save()
+            messages.success(request, "Your comment is pending approval!")
+            return redirect(item_view, product_id)
 
 
 def cart(request):
@@ -110,7 +131,7 @@ def processOrder(request):
         order.save()
         print(order.shipping)
 
-        if order.shipping == True:
+        if order.shipping is True:
             ShippingAddress.objects.create(
                     customer=customer,
                     order=order,
