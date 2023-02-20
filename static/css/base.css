@@ -176,3 +176,58 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-background {
+    background-color: whitesmoke;
+}
+
+.footer-text{
+    color: black;
+}
+
+.footer-list a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.footer-list a:hover {
+    color: #63372c;
+    cursor: pointer;
+}
+
+.footer-list li {
+    list-style: none;
+}
+
+.footer-list {
+    padding-left: 0;
+}
+
+.icons ul {
+    padding: 0;
+}
+
+.icons li {
+    display: inline;
+    padding: 10px;
+}
+
+.icons li i {
+    color: black;
+    font-size: 20px;
+}
+
+.icons li i:hover {
+    color: #465c69;
+}
+
+.terms{
+    cursor: pointer;
+}
