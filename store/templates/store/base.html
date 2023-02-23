@@ -80,7 +80,7 @@
               {% if request.user.is_superuser %}
               <a href="" class="dropdown-item">Product Management</a>
               {% endif %}
-              <a href="" class="dropdown-item">My Profile</a>
+              <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
               <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
               {% else %}
               <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
@@ -128,63 +128,285 @@
 
   <footer class="container-fluid">
     <div class="row footer-background">
-        <!-- Location -->
-        <div class="col-xs-4 col-sm-4 col-md-3">
-            <p class="mt-3"><strong>Where we're based:</strong></p>
-            <p>Gym Shop<br>445 Parrs Wood Road<br>Didsbury<br>Manchester<br>M20 5NE</p>
-        </div>
-        <!-- Information -->
-        <div class="col-xs-4 col-sm-4 col-md-3">
-            <p class="mt-3"><strong>Service</strong></p>
-            <ul class="mt-3 footer-list">
-                <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#retRefModal">
-                        <p class="mb-0" id="returns">Returns & Refunds</p>
-                    </a></li>
-                <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#shippingModal">
-                        <p id="shipping" class="mb-0">Delivery and Shipping</p>
-                    </a></li>
-                <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#faqModal">
-                        <p id="faqs" class="mb-0">FAQs</p>
-                    </a></li>
-                <li><a class="footer-text" href="https://www.privacypolicygenerator.info/live.php?token=jls2tjrSiZJavbdIrfIEzSZB7Ppfd0gh" target="_blank">Privacy
-                        Policy</a></li>
-            </ul>
-        </div>
-        <!-- Quick Links -->
-        <div class="col-xs-4 col-sm-4 col-md-3">
-            <p class="mt-3"><strong>Quick Links</strong></p>
-            <ul class="mt-3 footer-list">
-                <li><a class="footer-text" href="#">Shop</a></li>
-                <li><a class="footer-text" href="#">Contact Us</a></li>
-            </ul>
-        </div>
-        <!-- Social Links -->
-        <div class="col-xs-4 col-sm-12 col-md-3 icons">
-            <p class="mt-3 small-screen-hide"><strong>Follow Us</strong></p>
-            <ul class="mt-3">
-                <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"
-                        aria-label="Visit our facebook page"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/" target="_blank" rel="noopener"
-                        aria-label="Visit our twitter page"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"
-                        aria-label="Visit our instagram page"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/" target="_blank" rel="noopener"
-                        aria-label="Visit our youtube page"><i class="fa fa-youtube"></i></a></li>
-            </ul>
-        </div>
+      <!-- Location -->
+      <div class="col-xs-4 col-sm-4 col-md-3">
+        <p class="mt-3"><strong>Where we're based:</strong></p>
+        <p>Gym Shop<br>445 Parrs Wood Road<br>Didsbury<br>Manchester<br>M20 5NE</p>
+      </div>
+      <!-- Information -->
+      <div class="col-xs-4 col-sm-4 col-md-3">
+        <p class="mt-3"><strong>Service</strong></p>
+        <ul class="mt-3 footer-list">
+          <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#retRefModal">
+              <p class="mb-0" id="returns">Returns & Refunds</p>
+            </a></li>
+          <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#shippingModal">
+              <p id="shipping" class="mb-0">Delivery and Shipping</p>
+            </a></li>
+          <li><a class="footer-text" data-bs-toggle="modal" data-bs-target="#faqModal">
+              <p id="faqs" class="mb-0">FAQs</p>
+            </a></li>
+          <li><a class="footer-text"
+              href=""
+              target="_blank">Privacy
+              Policy</a></li>
+        </ul>
+      </div>
+      <!-- Quick Links -->
+      <div class="col-xs-4 col-sm-4 col-md-3">
+        <p class="mt-3"><strong>Quick Links</strong></p>
+        <ul class="mt-3 footer-list">
+          <li><a class="footer-text" href="#">Shop</a></li>
+          <li><a class="footer-text" href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <!-- Social Links -->
+      <div class="col-xs-4 col-sm-12 col-md-3 icons">
+        <p class="mt-3 small-screen-hide"><strong>Follow Us</strong></p>
+        <ul class="mt-3">
+          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Visit our facebook page"><i
+                class="fab fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Visit our twitter page"><i
+                class="fa fa-twitter"></i></a></li>
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"
+              aria-label="Visit our instagram page"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Visit our youtube page"><i
+                class="fa fa-youtube"></i></a></li>
+        </ul>
+      </div>
     </div>
-</footer>
+  </footer>
 
+  <!-- Modals -->
+  <!-- Returns and Refunds -->
+  <aside class="modal fade" id="retRefModal" tabindex="-1" aria-labelledby="retRefModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="retRefModalLabel">Returns and Refunds</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div data-custom-class="body">
+            <p class="text-muted">Last updated: February 23, 2023</p>
+
+            <p>Thank you for your purchase. We hope you are
+              happy with your purchase. However, if you are not completely satisfied with your
+              purchase for any reason, you may return it to us for a full refund or an exchange.</p>
+            <p>Please see below for more information on our return policy.</p>
+            <hr>
+            <h5>Return Process</h5>
+            <p>All returns must be postmarked within foutreen (14) days of the purchase date.
+              All refunded items must be in new and unused condition, with all original tags and
+              labels attached.</p>
+            <h5>Returns Process</h5>
+            <p>To return an item, please email customer service at <a
+                href="mailto:gymshop.example@gmail.com">gymshop.example@gmail.com</a> to obtain a
+              Return Merchandise Authorisation (RMA) number. After receiving a RMA number, place the item
+              secuely in its original packaging, and mail your return to the following address:
+            </p>
+            <div class="container border border-secondary">
+              <ul class="list-unstyled">
+                <li>Gym Shop</li>
+                <li>Attn: Returns</li>
+                <li>RMA #</li>
+                <li>445 Parrs Wood Road</li>
+                <li>Didsbury</li>
+                <li>Manchester</li>
+                <li>M20 5NE</li>
+              </ul>
+            </div>
+            <p>You may also use the prepaid shipping label enclosed with your package. Return shipping
+              charges will be paid or reimbursed by us.</p>
+            <h5>Refunds</h5>
+            <p>After receiving your return and inspecting the condition of your item, we will process your
+              return or exchange. Please allow at least two (2) days from the receipt of your item to
+              process your return or exchange. We will notify you by email when your return has been
+              processed.</p>
+            <h5>Exceptions</h5>
+            <p>For defective or damaged products, please contact us at the contact details below to arrange
+              a refund or exchange.</p>
+            <strong>Please Note</strong>
+            <ul>
+              <li>Sale items are FINAL SALE and cannot be returned.</li>
+            </ul>
+            <h5>Questions</h5>
+            <p>If you have any questions concerning our returns policy, please contact us at <a
+                href="mailto:gymshop.example@gmail.com">gymshop.example@gmail.com</a>.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- Delivery -->
+  <aside class="modal fade" id="shippingModal" tabindex="-1" aria-labelledby="shippingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="shippingModalLabel">Delivery and Shipping</h1>
+          <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#shippingModal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div data-custom-class="body">
+            <p class="text-muted">Last updated: October 28, 2022</p>
+
+            <p>Please carefully review our Shipping & Delivery Policy when purchasing our products. This
+              policy will apply to any order you place with us.</p>
+            <hr>
+            <h4><u>What are my shipping and delivery options?</u></h4>
+            <p>We offer delivery options to those in the UK. In some cases a third-party supplier may be
+              managing our inventory and will be responsible for delivering your products.</p>
+            <h5>Free Delivery</h5>
+            <p>We currently offer free standard delivery on orders over £500.
+            </p>
+            <h5>Expedited Delivery Fees</h5>
+            <p>We also offer delivery at a rate of 10% of the grand total of your order.</p>
+            <p>All times and dates given for delivery of the products are given in good faith but are
+              estimates only.</p>
+            <h5>Do you deliver Internationally?</h5>
+            <p>We do not offer any international shipping.</p>
+            <h5>Are there any other shipping restrictions?</h5>
+            <p>If you require your purchase to be delivered to a PO Box, first you must contact customer
+              service to determine if the delivery address is acceptable to recieve the products. If these
+              precautions are not taken and as a result delivery fails, GymShop will not be responsible or
+              liable to give a refund.</p>
+            <p>If you have questions about returns, please review our
+              <a class="terms" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#retRefModal">Returns and
+                Refunds Policy</a>.
+            </p>
+            <h5>Questions</h5>
+            <p>If you have any questions concerning our shipping and delivery policy, please contact us at
+              <a href="mailto:gymshop.example@gmail.com">gymshop.example@gmail.com</a>.
+            </p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- FAQ -->
+  <aside class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="faqModalLabel">FAQs</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Last updated: October 28, 2022</p>
+          <hr>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Where is my equipment from?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  All products are manufactured in our UK warehouses using components made in the UK.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Can I cancel my order?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>We are unable to cancel your order once this has been placed and accepted by our
+                    fulfilment centre in Manchester.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Can I amend my order?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once orders have been accepted by the fulfilment centre we are unable to make any
+                  amendments.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Can I change my shipping address provided?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>We are unable to change the shipping address once this has been accepted by our
+                    fulfilment centre. Please ensure all details are correct before placing your
+                    order.</p>
+                  <p>GymShop cannot be held liable for any limitations of customers personal
+                    devices when using our website. This includes, but is not limited to: Device
+                    make or
+                    model, operating system, browser, browser extensions, the use of autofill and
+                    third-party payment processors such as Apple Pay or Paypal whereby details are
+                    automatically entered.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  My product does not look like the one on the website.
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>The product images provided are for illustrative purposes only and have been
+                    photographed under studio conditions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h5>Other Questions</h5>
+          <p>If you have any other questions, please contact us at
+            <a href="mailto:gymshop.example@gmail.com">gymshop.example@gmail.com</a> and we will do our best
+            to answer them.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- Bootstap JS links -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
   </script>
   <!-- Stripe payments -->
   <script src="https://js.stripe.com/v3/"></script>
@@ -192,6 +414,7 @@
   <script src="https://kit.fontawesome.com/a3c891aa8d.js" crossorigin="anonymous"></script>
   <!-- JS link -->
   <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 
 </body>
 
