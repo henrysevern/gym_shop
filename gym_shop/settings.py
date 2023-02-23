@@ -21,15 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b7)f_dqmw(@x$@-uit+m5ex&v-bjp-(q#w$r_(im%oz=moe=1&'
+SECRET_KEY = 'django-insecure-b7)f_dqmw(@x$@-uit+m5ex&v-bjp-(q#w$r_(im%oz=moe=1&'  # noqa
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'
-STRIPE_API_KEY_HIDDEN = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'  # noqa
+STRIPE_API_KEY_HIDDEN = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'  # noqa
 
 
 # Application definition
@@ -48,7 +48,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # Custom apps
     'store',
+    'payments',
+    'profiles',
+    # Other
+    'crispy_forms',
+    'phonenumber_field',
 ]
+
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,16 +96,16 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1 
+SITE_ID = 1
 
-# We need to temporarily log those emails to the console so we can get the confirmation links.
+# We need to temporarily log those emails to the console so we can get the confirmation links.  # noqa
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# account authentication method is what tells allauth that we want to allow authentication using either usernames or emails.
+# account authentication method is what tells allauth that we want to allow authentication using either usernames or emails.  # noqa
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
-# These three email settings here make it so that an email is required to register for the site. 
-# Verifying your email is mandatory so we know users are using a real email. 
-# And they're gonna be required to enter their email twice on the registration page to make sure that they haven't made any typos.
+# These three email settings here make it so that an email is required to register for the site.  # noqa
+# Verifying your email is mandatory so we know users are using a real email.  # noqa
+# And they're gonna be required to enter their email twice on the registration page to make sure that they haven't made any typos.  # noqa
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
@@ -127,16 +134,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
