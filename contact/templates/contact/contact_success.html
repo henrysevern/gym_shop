@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mb-2">
+    <h2 class="logo-font">Thank you!</h2>
+    <hr>
+    <p>Your message has been recieved!</p>
+    <a href="{% url 'item_list' %}" class="btn btn-lg btn-outline-dark rounded-1">
+        <span class="icon">
+            <i class="fas fa-backward"></i>
+        </span>
+        <span class="text-uppercase">Back Home</span>
+    </a>
+</div>
+{% endblock %}
