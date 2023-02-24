@@ -1,0 +1,24 @@
+{% extends "store/base.html" %}
+{% load static %}
+<!-- Extends recipes/base.html -->
+{% load crispy_forms_tags %}
+<!-- Loads crisp forms for form design -->
+{% block content %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Update profile</legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group py-3">
+      <input class="btn btn-outline-primary" type="submit" value="Save" />
+    </div>
+  </form>
+  <div class="border-top pt-3">
+    <a href="{% url 'profile' %}">Cancel</a>
+  </div>
+</div>
+
+<!--End block content of recipes/base.html -->
+{% endblock content %}
