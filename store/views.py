@@ -1,13 +1,14 @@
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import JsonResponse
 from django.views.generic import DetailView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 import json
 import stripe
 import datetime
 from .models import *
-from .forms import CommentForm
+from .forms import CommentForm, ProductForm
 
 
 def item_list(request):
@@ -145,3 +146,35 @@ def processOrder(request):
     else:
         print('User is not logged in')
     return JsonResponse('Payment complete!', safe=False)
+
+
+@login_required()
+def add_product(request):
+    """Add product to the store"""
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, no access - admins only!")
+        return redirect(reverse("item_list"))
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            messages.success(
+                request, f"Successfully added a product: {product.title}!")
+            return redirect(reverse("item_view", args=[product.id]))
+        else:
+            messages.error(
+                request,
+                "Failed to add the product. Please \
+                check the form and try again.",
+            )
+    else:
+        form = ProductForm()
+
+    form = ProductForm()
+    template = 'store/add_product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
