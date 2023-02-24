@@ -225,3 +225,7 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, f"Successfully deleted the product!")
     return redirect(reverse('item_list'))
+
+
+def handle_404(request, exception):
+    return render(request, '404error.html')
