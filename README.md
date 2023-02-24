@@ -1,108 +1,58 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Gym Shop
 
-Welcome henrysevern,
+This website is a full stack ecommerce store to allow people/gyms to buy commercial gym equipment from the mockup plant company Gym shop.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+To visit the website, please visit the deployed site [here](https://###/).
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+![Responsive Mockup](documentation/testing/gymshop-amiresponsive.png)
 
-## Gitpod Reminders
+## Target Audience
+- People looking to buy gym equipment for a home gym.
+- Commercial gyms looking to buy wholesale equipment for a gym.
+- People looking to get into shape by purchasing exercise equipment.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## User Stories
+1. User Authentication / Accounts
+- Site users should be able to register an account that allows a user to sign in and out of the site.
+- A user should be able to create a profile to store personal information to make checkout easier with default personal information to automatically populate form fields at checkout.
+- Users should be able to amend profile information to keep records up-to-date.
+- A user should be able to reset their password via email so the account is not lost if the password is forgotten.
+2. Site Navigation
+- Site users should be able to navigate fluidly throughout the website without having to use the back button.
+- A user should be able to direct themselves through the site with confidence and clarity to where they are navigating to.
+- Users should be able to search the site for specific related content that they seek.
+3. Shopping
+- Users should be able to view the products that GymShop offer for purchase.
+- A user should be able to add any products they want to buy to their shopping bag for review.
+- A user should be able to add multiples of an item to their shopping bag if they so wish.
+- Users should be able to filter and sort results based on their shopping goals.
+- Site users should be able to view all product information before adding a product to their bag.
+4. Cart
+- Users should be able to view all items, and quantities that they have added to their shopping cart.
+- Site users should be able to amend their order in their cart, changing the quantities of a product or removing the product entirely from the cart.
+- A user should be shown the delivery costs and any additional costs of their order.
+- Users should be able to safely navigate to the checkout to finalise their order.
+5. User Checkout
+- A user should be able to checkout securely and pay for their order, finalising the transaction and confirming delivery address.
+- Once checked-out, a customer should receive confirmation of their order.
+6. Profiles
+- Site users should be able to create a profile to store their default delivery address, which will auto-populate the checkout view. 
+- Site users should also be able to view their previous order history.
+- Profile users should be able to signin, signout, view their profile and amend their default delivery information. 
+7. Contact 
+- All site users should have the ability to contact GymShop.
+8. Site Admin
+- Site admins should have secure access to product management.
+- Admins will be able to add new products.
+- Admins will be able to edit existing products.
+- Admins will be able to delete products from the store.
+- See all orders, products, product categories, and customer messages.
 
-`python3 -m http.server`
+## Features 
 
-A blue button should appear to click: _Make Public_,
+### Existing Features 
 
-Another blue button should appear to click: _Open Browser_.
+__Navigation Bar__
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+__Footer__
 
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
-------
-
-## Release History
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
-
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
-
-**July 2 2021:** Remove extensions that are not available in Open VSX.
-
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
-
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
