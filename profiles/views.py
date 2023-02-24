@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView
@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from . import models
 from .models import UserProfile
+from .forms import UserProfileForm
 
 
 @login_required
@@ -23,16 +24,34 @@ def profile(request):
     return render(request, template, context)
 
 
-class profileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = models.UserProfile
-    fields = ['first_name', 'last_name', 'phone', 'default_address',
-              'default_city', 'default_county', 'default_postcode']
-    # Function only allows the user to update their own profile
+def edit_profile(request, profile_id):
+    """Method to update personal profile"""
+    if not request.user.is_authenticated:
+        messages.error(request, "Sorry, no access - user only!")
+        return redirect(reverse("profile"))
 
-    def test_func(self):
-        profile = self.get_object()
-        return self.request.user == profile.user
+    profile = get_object_or_404(UserProfile, pk=profile_id)
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, f"Successfully updated your profile!")
+            return redirect(reverse("profile"), args=[profile.id])
+        else:
+            messages.error(
+                request,
+                "Failed to update profile. Please \
+                check the form and try again.",
+            )
+    else:
+        form = UserProfileForm(instance=profile)
+        # messages.info(request, f"You are editing {user.username}'s profile")
 
-    def form_valid(self, form):
-        form.instance.profile = self.request.user
-        return super().form_valid(form)
+    template = "profiles/edit_profile.html"
+    context = {
+        "form": form,
+        "profile": profile,
+    }
+
+    return render(request, template, context)
