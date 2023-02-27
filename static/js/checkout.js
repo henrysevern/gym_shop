@@ -1,4 +1,3 @@
-
 // moved these to checkout.html
 // var shipping = '{{order.shipping}}'
 // var total = '{{order.get_cart_total}}'

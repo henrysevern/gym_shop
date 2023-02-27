@@ -37,40 +37,9 @@
                 </div>
 
                 <hr>
-                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-            
+                <button type="submit" id="form-button" class="btn btn-success btn-block">Continue</button>
+            </form>
         </div>
-
-        <br>
-        <!-- Button to make payment -->
-        <div class="box-element hidden" id="payment-info">
-            <fieldset class="px-3">
-                <!-- <hr>
-                <p>Payment:</p>
-                <hr> -->
-                <!-- A Stripe card element will go here -->
-                <div class="mb-3" id="card-element"></div>
-    
-                <!-- Used to display form errors -->
-                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-            </fieldset>
-            <button id="submit-button" class="btn btn-black rounded-0" href="{% url 'payment' %}">
-                <span class="font-weight-bold">Continue to payment</span>
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </button>
-            <p class="small text-danger my-0">
-                <span class="icon">
-                    <i class="fas fa-exclamation-circle"></i>
-                </span>
-                <span>Your card will be charged <strong>£{{ order.get_cart_total|floatformat:2 }}</strong></span>
-            </p>
-    
-        </div>
-    </form>
-            
-        
     </div>
     <!-- Order summary section -->
     <div class="col-lg-6">
@@ -93,14 +62,14 @@
     </div>
 </div>
 <br>
+
 <script type="text/javascript">
     const shipping = '{{order.shipping}}'
     const total = '{{order.get_cart_total}}'
 
-</script>
-  
+</script>    
 {% endblock content %}
 
 {% block head %}
-<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/checkout.js' %}" defer></script>
 {% endblock head %}

@@ -14,6 +14,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script type="text/javascript">
     var user = '{{request.user}}'
+    const userEmail = "{{request.user.email}}"
 
     function getCookie(name) {
       let cookieValue = null;
@@ -32,6 +33,9 @@
     }
     const csrftoken = getCookie('csrftoken');
   </script>
+  
+  {% block head %}
+  {% endblock head %}
 
   <title>Gym Shop</title>
 </head>
@@ -95,7 +99,7 @@
                 <a href="{% url 'cart' %}">
                   <img id="cart-icon" src="{% static 'images/cart.png' %}">
               </div>
-              <p class="my-0 text-black" id="cart-total">{{cartItems}}</p>
+              <p class="my-0" id="cart-total">0</p>
               </a>
             </div>
           </li>
@@ -420,12 +424,11 @@
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
   </script>
   <!-- Stripe payments -->
-  <script src="https://js.stripe.com/v3/"></script>
+  
   <!-- Font awsome link -->
   <script src="https://kit.fontawesome.com/a3c891aa8d.js" crossorigin="anonymous"></script>
   <!-- JS link -->
   <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 
 </body>
 

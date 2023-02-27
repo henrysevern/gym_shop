@@ -17,6 +17,11 @@ stripe.api_key = settings.STRIPE_API_KEY_HIDDEN
 @require_http_methods(["GET"])
 def payment_view(request):
 
+    if not request.user.is_authenticated:
+        # you'd need to create the payments/sign_up_required.html file
+        # with an <a></a> link to the sign up page
+        return render(request, 'payments/sign_up_required.html')
+
     localhost = 'http://localhost:8000'
     heroku = 'gym-shop.herokuapp.com'
 
@@ -27,6 +32,7 @@ def payment_view(request):
         # the url stripe sends the user to when the payment is completed
         "stripe_redirect_url": redirect_hostname + reverse('payment_complete')
     }
+
 
     return render(request, "payments/payment.html", context=context)
 
@@ -90,8 +96,9 @@ def get_payment_status_message(payment_intent):
         return "Payment is being processed"
     if status == "requires_payment_method":
         return "Payment failed, please try again"
-    
+
     return "Something went wrong with your payment."
+
 
 @require_http_methods(["GET"])
 def payment_complete(request):
@@ -100,7 +107,7 @@ def payment_complete(request):
     payment_intent_id = request.GET.get('payment_intent')
 
     if payment_intent_id:
-        
+
         payment = get_object_or_404(
             Payment,
             customer=request.user.customer,
@@ -110,11 +117,11 @@ def payment_complete(request):
         # get the payment object from stripe
         payment_intent = stripe.PaymentIntent.retrieve(
                 payment_intent_id)
-        
+
         payment_status_message = get_payment_status_message(payment_intent)
 
         if not payment.complete:
-            
+
             customer = request.user.customer
 
             if not customer.stripe_customer_id:
@@ -151,7 +158,8 @@ def payment_complete(request):
             "payment_status_message": payment_status_message
         }
 
-        return render(request, 'payments/payment_complete.html', context=context)
+        return render(request, 'payments/payment_complete.html',
+                      context=context)
 
     # if no payment_intent parameter in the url, return them to the main page
     return redirect(reverse('item_list'))

@@ -13,6 +13,7 @@ class Customer(models.Model):
                                 on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200)
+    stripe_customer_id = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name

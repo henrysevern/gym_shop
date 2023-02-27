@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+
 from store.models import Order
 
 from . import models

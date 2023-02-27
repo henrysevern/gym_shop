@@ -1,10 +1,13 @@
-{% extends 'store/base.html' %} 
-{% load static %} 
+{% extends 'store/base.html' %}
+{% load static %}
 {% block content %}
-<h1>Payment Sent</h1>
-<h3>Thank you for your purchase. Your order number is {{order.id}}</h3>
+    <div>
+        <h2>
+            Payment Sent
+        </h2>
+        <p>Thank you for your purchase. Your order number is <b>{{order.id}}</b></p>
+        <p>{{payment_status_message}}</p>
+        <a href="{% url 'item_list' %}">Back to Store</a>
+    </div>
 
-{{payment_status_message}}
-
-<a class="btn btn-outline-dark" href="{% url 'item_list' %}">&#x2190; Back to Store</a>
 {% endblock content %}
