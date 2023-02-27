@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import os
+if os.path.exists("env.py"):
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gkr)d$9z70$*5@l&k4@==)kwxz3wdu-dm!x0h+0tl3&=)()0-n'  # os.environ.get('SECRET_KEY', '')
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,8 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost']
 
-STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'  # noqa
-STRIPE_API_KEY_HIDDEN = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'  # noqa
+STRIPE_API_KEY_PUBLISHABLE = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_API_KEY_HIDDEN = os.environ.get("STRIPE_SECRET_KEY")
 
 
 # Application definition
@@ -188,6 +191,7 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
 
 if 'USE_AWS' in os.environ:
+    
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
