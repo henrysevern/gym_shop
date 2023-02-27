@@ -33,7 +33,6 @@ def payment_view(request):
         "stripe_redirect_url": redirect_hostname + reverse('payment_complete')
     }
 
-
     return render(request, "payments/payment.html", context=context)
 
 
