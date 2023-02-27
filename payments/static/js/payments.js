@@ -12,7 +12,7 @@ document
     .addEventListener("submit", handleSubmit);
 
 async function initialize() {
-    const response = await fetch("/payments/payment_start", {
+    const response = await fetch("/payments/payment_start/", {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
     });
