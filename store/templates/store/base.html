@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="img/png" href="{% static 'images/favicon.png' %}">
   <!-- CSS link -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <!-- Bootstrap link -->
@@ -41,12 +42,12 @@
   <header class="container-fluid fixed-top bg-light">
     <div class="row">
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a href="{% url 'item_list' %}" class="nav-link main-logo-link">
+        <a href="" class="nav-link main-logo-link">
           <h2 class="logo-font text-black my-0">Gym Shop</h2>
         </a>
       </div>
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-        <form method="GET" action="">
+        <form method="GET" action="{% url 'item_list' %}">
           <div class="input-group w-100">
             <input class="form-control border border-black rounded-0" type="text" name="q"
               placeholder="What are you looking for?">
