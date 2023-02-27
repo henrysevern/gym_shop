@@ -1,0 +1,10 @@
+{% extends 'store/base.html' %} 
+{% load static %} 
+{% block content %}
+<h1>Payment Sent</h1>
+<h3>Thank you for your purchase. Your order number is {{order.id}}</h3>
+
+{{payment_status_message}}
+
+<a class="btn btn-outline-dark" href="{% url 'item_list' %}">&#x2190; Back to Store</a>
+{% endblock content %}
