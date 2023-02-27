@@ -17,6 +17,18 @@ stripe.api_key = settings.STRIPE_API_KEY_HIDDEN
 @require_http_methods(["GET"])
 def payment_view(request):
 
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,
+                                                     complete=False)
+        order.shipping = True
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+
     if not request.user.is_authenticated:
         # you'd need to create the payments/sign_up_required.html file
         # with an <a></a> link to the sign up page
@@ -30,7 +42,10 @@ def payment_view(request):
     context = {
         "stripe_public_key": settings.STRIPE_API_KEY_PUBLISHABLE,
         # the url stripe sends the user to when the payment is completed
-        "stripe_redirect_url": redirect_hostname + reverse('payment_complete')
+        "stripe_redirect_url": redirect_hostname + reverse('payment_complete'),
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
     }
 
     return render(request, "payments/payment.html", context=context)
