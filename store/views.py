@@ -86,18 +86,22 @@ def cart(request):
 
 
 def checkout(request):
+    # pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,
                                                      complete=False)
         order.shipping = True
         items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
     context = {
         'items': items,
-        'order': order
+        'order': order,
+        'cartItems': cartItems,
     }
     return render(request, "store/checkout.html",
                   context)
@@ -147,19 +151,20 @@ def processOrder(request):
         order.transaction_id = transaction_id
         order.shipping = True
 
-        if total == order.get_cart_total:
-            order.complete = True
+        # if total == order.get_cart_total:
+        #     order.complete = True
         order.save()
+
         print(order.shipping)
 
         if order.shipping is True:
             ShippingAddress.objects.create(
-                    customer=customer,
-                    order=order,
-                    address=data['shipping']['address'],
-                    city=data['shipping']['city'],
-                    postcode=data['shipping']['postcode'],
-                    county=data['shipping']['country'],
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                postcode=data['shipping']['postcode'],
+                county=data['shipping']['country'],
 
             )
 
@@ -245,6 +250,10 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, f"Successfully deleted the product!")
     return redirect(reverse('item_list'))
+
+
+def handle_404(request, exception):
+    return render(request, '404error.html')
 
 
 def handle_404(request, exception):
