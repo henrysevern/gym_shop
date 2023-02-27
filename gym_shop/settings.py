@@ -109,8 +109,6 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-# We need to temporarily log those emails to the console so we can get the confirmation links.  # noqa
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # account authentication method is what tells allauth that we want to allow authentication using either usernames or emails.  # noqa
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
@@ -214,6 +212,19 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'gym-shop@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smpt.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smpt.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 
 # Default primary key field type
