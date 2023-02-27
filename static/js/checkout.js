@@ -1,5 +1,7 @@
-var shipping = '{{order.shipping}}'
-var total = '{{order.get_cart_total}}'
+
+// moved these to checkout.html
+// var shipping = '{{order.shipping}}'
+// var total = '{{order.get_cart_total}}'
 
 if (shipping == 'False') {
     document.getElementById('shipping-info').innerHTML = ''
@@ -22,11 +24,6 @@ var form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
     e.preventDefault()
     console.log('Form submitted...')
-    document.getElementById('form-button').classList.add('hidden')
-    document.getElementById('payment-info').classList.remove('hidden')
-})
-// Sends entered form data
-document.getElementById('make-payment').addEventListener('click', function (e) {
     submitFormData()
 })
 
@@ -61,21 +58,21 @@ function submitFormData() {
 
     var url = '/process_order/'
     fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify({
-                'form': userFormData,
-                'shipping': shippingInfo
-            })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            'form': userFormData,
+            'shipping': shippingInfo
         })
+    })
 
         .then((response) => response.json())
         .then((data) => {
             console.log('Success', data);
             alert('Shipping adress added!');
-            window.location.href = "payments/payment/"
+            window.location.href = "/payments"
         })
 }
