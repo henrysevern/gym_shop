@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.generic import DetailView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 import json
 import stripe
 import datetime
@@ -13,8 +14,28 @@ from .forms import CommentForm, ProductForm
 
 def item_list(request):
     products = Product.objects.all()
+    query = None
+    categories = None
+
+    if request.GET:
+        if 'category' in request.GET:
+            categories = request.GET['category'].split(',')
+            products = products.filter(category__name__in=categories)
+            categories = Category.objects.filter(name__in=categories)
+
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(request, "You didn't enter any search criteria!")
+                return redirect(reverse('item_list'))
+
+            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            products = products.filter(queries)
+
     context = {
-        'products': products
+        'products': products,
+        'search_term': query,
+        'current_categories': categories
     }
     return render(request, "store/item_list.html", context)
 
@@ -65,7 +86,6 @@ def cart(request):
 
 
 def checkout(request):
-    # pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,
