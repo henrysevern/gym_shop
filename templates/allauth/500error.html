@@ -1,0 +1,24 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid bg-light">
+    <!-- Image -->
+    <div class="row main-container text-center">
+        <div id="image-container" class="col-12">
+            <img class="img-fluid large-error-img" src="{% static  'images/injury' %}" alt="injury">
+        </div>
+    </div>
+    <!-- Message -->
+    <div class="text-center box-element">
+        <h3>Whoops...</h3>
+        <p class="text-muted">Error: 500</p>
+        <br>
+        <p>Looks like we have a little problem. We're looking into what went wrong</p>
+        <p>Please try finding your way back to
+            <a href="{% url 'item_list' %}">GymShop</a>.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
