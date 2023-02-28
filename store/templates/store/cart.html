@@ -9,13 +9,17 @@
 
 				<br>
 				<br>
+				{% if request.user.is_authenticated %}
 				<table class="table">
 					<tr>
 						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
 						<th><h5>Total:<strong>£{{order.get_cart_total|floatformat:2}}</strong></h5></th>
+						
+						
 						<th>
 							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
 						</th>
+						
 					</tr>
 				</table>
 
@@ -47,6 +51,12 @@
 					<div style="flex:1"><p>£{{item.get_total|floatformat:2}}</p></div>
 				</div>
                 {% endfor %}
+				{% else %}
+				<div class="box-element">
+					<h6>Please <span> <a href="{% url 'account_signup' %}">Register</a></span> or <span> <a href="{% url 'account_login' %}">Log in</a></span> to add to cart and purchase orders!</h6>
+     
+				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
