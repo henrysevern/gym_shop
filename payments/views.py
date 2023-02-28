@@ -172,7 +172,7 @@ def payment_complete(request):
             "payment_status_message": payment_status_message
         }
 
-        return render(request, 'payments/payment_complete.html',
+        return render(request, 'payments/payment_complete.html/',
                       context=context)
 
     # if no payment_intent parameter in the url, return them to the main page
