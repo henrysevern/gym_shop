@@ -3,9 +3,20 @@
 <html lang="en">
 
 <head>
+  {% block meta %}
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Description -->
+  <meta name="description"
+    content="Build your own commercial or home gym with GymShop, the only place to buy your gym equipment.
+    From Treadmills, to Strength Machines, to a simple yoga mat. We have everything you need at GymShop ">
+  <!-- Keywords -->
+  <meta name="keywords" content="home gym, homegym, gym, gym shop, gym equipment, 
+  home weights, strength machines, fitness, fitness equipment, cardio, weights, dumbbells, 
+  treadmill, getting fit">
+  {% endblock %}
+
   <link rel="shortcut icon" type="img/png" href="{% static 'images/favicon.png' %}">
   <!-- CSS link -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -60,6 +71,7 @@
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
         <form method="GET" action="{% url 'item_list' %}">
           <div class="input-group w-100">
+
             <input class="form-control border border-black rounded-0" type="text" name="q"
               placeholder="What are you looking for?">
             <div class="input-group-append">
@@ -106,7 +118,7 @@
                 <a href="{% url 'cart' %}">
                   <img id="cart-icon" src="{% static 'images/cart.png' %}">
               </div>
-              <p class="my-0" id="cart-total">0</p>
+              <p class="my-0" id="cart-total">{{cartItems}}</p>
               </a>
             </div>
           </li>
@@ -125,11 +137,12 @@
     </div>
     <div id="delivery-banner" class="row text-center">
       <div class="col">
-        <h4 class="logo-font my-1">Free delivery on orders over £99</h4>
+        <h4 class="logo-font my-1">Free delivery on all orders</h4>
+        <h6 class="my-1" >Only UK mainland deliveries</h6>
       </div>
     </div>
   </header>
-
+<br>
   <div class="container">
     <br>
     {% block content %}
