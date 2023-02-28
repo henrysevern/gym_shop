@@ -33,7 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost']
 
-STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0'    # noqa
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'    # noqa
 STRIPE_API_KEY_HIDDEN = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'    # noqa
 
 
