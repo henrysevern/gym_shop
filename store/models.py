@@ -55,7 +55,7 @@ class Product(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except image.url.DoesNotExist:
             url = ''
         return url
 

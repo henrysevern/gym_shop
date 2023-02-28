@@ -20,7 +20,7 @@ def item_list(request):
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=categories)
+            products = products.filter(category__title__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
         if 'q' in request.GET:
@@ -29,7 +29,7 @@ def item_list(request):
                 messages.error(request, "You didn't enter any search criteria!")    # noqa
                 return redirect(reverse('item_list'))
 
-            queries = Q(name__icontains=query) | Q(description__icontains=query)    # noqa
+            queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
             products = products.filter(queries)
 
     context = {
@@ -86,7 +86,6 @@ def cart(request):
 
 
 def checkout(request):
-    # pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,
