@@ -58,7 +58,21 @@ def item_view(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     comments = Comment.objects.filter(product=product, approved=True)
     form = CommentForm(request.POST or None)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,
+                                                     complete=False)
+        items = order.orderitem_set.all()
+        cart_Items = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_Items = order["get_cart_items"]
+
     context = {
+        'items': items,
+        'order': order,
+        'cartItems': cart_Items,
         'product': product,
         'comments': comments,
         "form": form,
@@ -75,7 +89,7 @@ def add_comment(request, product_id):
     if request.method == "POST":
         if form.is_valid():
             form.save(commit=False)
-            form.instance.recipe = product
+            form.instance.product = product
             form.instance.user = request.user
             form.save()
             messages.success(request, "Your comment is pending approval!")
@@ -275,3 +289,7 @@ def handle_404(request, exception):
 
 def handle_404(request, exception):
     return render(request, '404error.html')
+
+
+def handle_500(request):
+    return render(request, '500error.html')
