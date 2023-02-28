@@ -20,7 +20,7 @@ def item_list(request):
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
-            products = products.filter(category__title__in=categories)
+            products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
         if 'q' in request.GET:
@@ -32,7 +32,21 @@ def item_list(request):
             queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
             products = products.filter(queries)
 
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,
+                                                     complete=False)
+        items = order.orderitem_set.all()
+        cart_Items = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_Items = order["get_cart_items"]
+
     context = {
+        'items': items,
+        'order': order,
+        'cartItems': cart_Items,
         'products': products,
         'search_term': query,
         'current_categories': categories
@@ -75,16 +89,20 @@ def cart(request):
         order, created = Order.objects.get_or_create(customer=customer,
                                                      complete=False)
         items = order.orderitem_set.all()
+        cart_Items = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_Items = order["get_cart_items"]
     context = {
         'items': items,
-        'order': order
+        'order': order,
+        'cartItems': cart_Items,
     }
     return render(request, "store/cart.html", context)
 
 
+@login_required()
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
