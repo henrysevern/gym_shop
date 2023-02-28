@@ -231,3 +231,34 @@ footer {
 .terms{
     cursor: pointer;
 }
+
+/* Force the footer to bottom of page */
+html, body {
+    height: 100%;
+}
+
+body > footer {
+  position: sticky;
+  top: 100vh;
+}
+
+#offers-block {
+    padding-top:50%;
+}
+
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 28px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+
+a {
+    outline: none !important;
+}
+
+.logo-font {
+    text-transform: uppercase;
+}
