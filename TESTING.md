@@ -86,13 +86,13 @@
 
    [contact/models.py validation](documentation/testing/validation/contact.models.py.png)
 
+   - No errors were returned and all code met PEP8 compliance when `contact/views.py` file was passed through Code Institute's Python Linter
+
+   [contact/views.py validation](documentation/testing/validation/contact.views.py.png)
+
    - No errors were returned and all code met PEP8 compliance when `contact/urls.py` file was passed through Code Institute's Python Linter
 
    [contact/urls.py validation](documentation/testing/validation/contact.urls.py.png)
-
-   - No errors were returned and all code met PEP8 compliance when `contact/views.py` file was passed through Code Institute's Python Linter
-
-   [profile/views.py validation](documentation/testing/profile.views.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `profile/admin.py` file was passed through Code Institute's Python Linter
 
@@ -130,16 +130,33 @@
 
    [payment/views.py validation](documentation/testing/payment.views.py.png)
 
+   - No errors were returned and all code met PEP8 compliance when `gym_shop/settings.py` file was passed through Code Institute's Python Linter
 
+   [gym_shop/settings.py validation](documentation/testing/gym_shop.settings.py.png)
 
+   - No errors were returned and all code met PEP8 compliance when `gym_shop/urls.py` file was passed through Code Institute's Python Linter
+
+   [gym_shop/urls.py validation](documentation/testing/gym_shop.urls.py.png)
 
 ### Fixed Bugs
 
 
 ## Browser Compatibility
 
+- Website launched successfully on `Firefox`
+
+  >![Firefox](documentation/testing/browser_compatibility/firefox.png)
+
+- Website launched successfully on `Safari`
+
+  >![Safari](documentation/testing/browser_compatibility/safari.png)
+
+- Website launched successfully on `Chrome`
+
+  >>![Chrome](documentation/testing/browser_compatibility/firefox.png)
 
 ## Responsiveness
+
 
 
 ## User Story Testing
