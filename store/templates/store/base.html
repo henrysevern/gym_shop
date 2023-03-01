@@ -8,8 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Description -->
-  <meta name="description"
-    content="Build your own commercial or home gym with GymShop, the only place to buy your gym equipment.
+  <meta name="description" content="Build your own commercial or home gym with GymShop, the only place to buy your gym equipment.
     From Treadmills, to Strength Machines, to a simple yoga mat. We have everything you need at GymShop ">
   <!-- Keywords -->
   <meta name="keywords" content="home gym, homegym, gym, gym shop, gym equipment, 
@@ -116,10 +115,10 @@
             <div class="text-center">
               <div>
                 <a href="{% url 'cart' %}">
-                  <img id="cart-icon" src="{% static 'images/cart.png' %}">
+                  <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="cart">
+                </a>
               </div>
               <p class="my-0" id="cart-total">{{cartItems}}</p>
-              </a>
             </div>
           </li>
         </ul>
@@ -138,11 +137,11 @@
     <div id="delivery-banner" class="row text-center">
       <div class="col">
         <h4 class="logo-font my-1">Free delivery on all orders</h4>
-        <h6 class="my-1" >Only UK mainland deliveries</h6>
+        <h6 class="my-1">Only UK mainland deliveries</h6>
       </div>
     </div>
   </header>
-<br>
+  <br>
   <div class="container">
     <br>
     {% block content %}
@@ -176,6 +175,7 @@
               target="_blank">Privacy
               Policy</a></li>
         </ul>
+
       </div>
       <!-- Quick Links -->
       <div class="col-xs-4 col-sm-4 col-md-3">
@@ -282,7 +282,7 @@
             <p>Please carefully review our Shipping & Delivery Policy when purchasing our products. This
               policy will apply to any order you place with us.</p>
             <hr>
-            <h4><u>What are my shipping and delivery options?</u></h4>
+            <h4>What are my shipping and delivery options?</h4>
             <p>We offer delivery options to those in the UK. In some cases a third-party supplier may be
               managing our inventory and will be responsible for delivering your products.</p>
             <h5>Free Delivery</h5>
@@ -338,7 +338,9 @@
                 data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                   <hr>
-                  <li>All products are manufactured in our UK warehouses using components made in the UK.</li>
+                  <ul>
+                    <li>All products are manufactured in our UK warehouses using components made in the UK.</li>
+                  </ul>
                   <br>
                 </div>
               </div>
@@ -354,8 +356,10 @@
                 data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                   <hr>
-                  <li>We are unable to cancel your order once this has been placed and accepted by our
-                    fulfilment centre in Manchester.</li>
+                  <ul>
+                    <li>We are unable to cancel your order once this has been placed and accepted by our
+                      fulfilment centre in Manchester.</li>
+                  </ul>
                   <br>
                 </div>
               </div>
@@ -371,8 +375,10 @@
                 data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                   <hr>
-                  <li>Once orders have been accepted by the fulfilment centre we are unable to make any
-                    amendments.</li>
+                  <ul>
+                    <li>Once orders have been accepted by the fulfilment centre we are unable to make any
+                      amendments.</li>
+                  </ul>
                   <br>
                 </div>
               </div>
@@ -388,6 +394,7 @@
                 data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                   <hr>
+                  <ul>
                   <li>We are unable to change the shipping address once this has been accepted by our
                     fulfilment centre. Please ensure all details are correct before placing your
                     order.</li>
@@ -397,6 +404,7 @@
                     model, operating system, browser, browser extensions, the use of autofill and
                     third-party payment processors such as Apple Pay or Paypal whereby details are
                     automatically entered.</li>
+                  </ul>
                   <br>
                 </div>
               </div>
@@ -412,8 +420,10 @@
                 data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                   <hr>
+                  <ul>
                   <li>The product images provided are for illustrative purposes only and have been
                     photographed under studio conditions.</li>
+                  </ul>
                   <br>
                 </div>
               </div>
