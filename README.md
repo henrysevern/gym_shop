@@ -166,7 +166,9 @@ __Editing and Deleting products__
 __Django Admin__
 
 ### Features left to impliment
-- 
+- A dynamic pop up model to explain what the site is about with a shop now button.
+- More catergory filtering, there is not many products on the site but if there was to be lots would be helpful for the user to be able to filter more easily with suggestion products.
+
 
 
 ## Marketing & search engine optimization
