@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 
-<div class="row">
+<div class="row col-sm-12">
     {% for product in products %}
-    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <img class="thumbnail" src="{{ product.imageURL }}" alt="{{product.title}}">
         <div class="box-element product">
             <h6><strong>{{product.title}}</strong></h6>

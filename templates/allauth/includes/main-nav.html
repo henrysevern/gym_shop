@@ -3,26 +3,23 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'item_list' %}" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'item_list' %}" id="all-products-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Products
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="" class="dropdown-item">By Price</a>
-                <a href="" class="dropdown-item ">By Rating</a>
-                <a href="" class="dropdown-item ">By Category</a>
                 <a href="{% url 'item_list' %}" class="dropdown-item">All Products</a>
             </div>
         </li>
 
         <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="cardio-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="cardio-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Cardio
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="cardio-link">
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
+                <a href="{% url 'item_list' %}?category=Cardio Machines" class="dropdown-item">Cardio Machines</a>
+                <a href="{% url 'item_list' %}?category=Cross Trainers" class="dropdown-item">Cross Trainers</a>
+                <a href="{% url 'item_list' %}?category=Functional Fitness" class="dropdown-item">Functional Fitness</a>
+                <a href="{% url 'item_list' %}?category=Sports Equipment" class="dropdown-item">Sports Equipment</a>
             </div>
         </li>
 
@@ -31,21 +28,22 @@
                 Strength
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="strength-link">
-                <a href="{% url 'item_list' %}?category=Strength" class="dropdown-item">Strength</a>
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
+                <a href="{% url 'item_list' %}?category=Benches" class="dropdown-item">Benches</a>
+                <a href="{% url 'item_list' %}?category=Dumbbells" class="dropdown-item">Dumbbells</a>
+                <a href="{% url 'item_list' %}?category=Weight_Machines" class="dropdown-item">Weight Machines</a>
+                <a href="{% url 'item_list' %}?category=Cables" class="dropdown-item">Cables</a>
             </div>
         </li>
 
         <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Home Gym
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
-                <a href="" class="dropdown-item"></a>
+                <a href="{% url 'item_list' %}?category=Accessories" class="dropdown-item">Accessories</a>
+                <a href="{% url 'item_list' %}?category=Yoga mats" class="dropdown-item">Yoga mats</a>
+                <a href="{% url 'item_list' %}?category=Resistance Bands" class="dropdown-item">Resistance Bands</a>
+                <a href="{% url 'item_list' %}?category=Home Gym" class="dropdown-item">Home Gym</a>
             </div>
         </li>
     </ul>

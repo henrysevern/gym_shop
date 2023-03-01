@@ -30,7 +30,6 @@ body {
 
 .shop-now-button {
     background: white;
-    color: white;
     min-width: 260px;
 }
 
@@ -261,4 +260,14 @@ a {
 
 .logo-font {
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 990px){
+    body {
+        padding-top: 250px;
+        background-size: cover;
+        height: calc(100vh - 164px);
+        color: #555;
+        font-family: 'Lato';
+    }
 }
