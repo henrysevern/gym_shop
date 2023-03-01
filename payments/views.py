@@ -35,7 +35,7 @@ def payment_view(request):
         return render(request, 'payments/sign_up_required.html')
 
     localhost = 'http://localhost:8000'
-    heroku = 'gym-shop.herokuapp.com'
+    heroku = 'https://gym-shop.herokuapp.com'
 
     redirect_hostname = localhost if settings.DEBUG else heroku
 
