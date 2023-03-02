@@ -4,7 +4,9 @@ This website is a full stack ecommerce store to allow people/gyms to buy commerc
 
 To visit the website, please visit the deployed site [here](https://gym-shop.herokuapp.com/).
 
-![Responsive Mockup](documentation/testing/gymshop-amiresponsive.png)
+![Responsive Mockup](documentation/features/logo.png)
+
+
 
 ## Target Audience
 - People looking to buy gym equipment for a home gym.
@@ -50,8 +52,29 @@ To visit the website, please visit the deployed site [here](https://gym-shop.her
 
 ### Wireframes
 
+- Store wireframe
+
+ ![Products wireframe](documentation/wireframes/home-page_wireframe.png)
+
+
+
+ - Product View wireframe
+
+ ![Product view wireframe](documentation/wireframes/item_view_wireframe.png)
+
 
 ## Database Model
+
+- GymShop Database Model
+
+ ![Database](documentation/database_model/database.png)
+
+
+## OUTSTANDING BUG
+*** Please read ***
+- When user signs up there is an error when the button is pressed saying the user has no customer. This is because ive tried to develop a customer model where anonymous users can checkout and pay, I built my app of that and then was going to impliment user log in. If you use the superuser to create a customer for the user then the functionality works fine.
+- For quick fix I could have implimented a quick form during sign up to populate the customer model with the users information. The models and views need adjusting to aloow for both logged in users and anonymous users to checkout and pay. I ran out of project time to impliment this.
+
 
 ## Features 
 
@@ -165,12 +188,6 @@ __Editing and Deleting products__
 
 __Django Admin__
 
-### Features left to impliment
-- A dynamic pop up model to explain what the site is about with a shop now button.
-- More catergory filtering, there is not many products on the site but if there was to be lots would be helpful for the user to be able to filter more easily with suggestion products.
-
-
-
 ## Marketing & search engine optimization
 I have used several marketing techniques in the project in order to attract customers.
 
@@ -209,10 +226,7 @@ I have used several marketing techniques in the project in order to attract cust
 - No follow attributes are used on social media links in this application. A nofollow tag is a basic piece of HTML. Appended to a hyperlink, it allows webmasters to control whether search engines follow a link or not. For example, the following URL on a page of another site allows search engines to visit GymShop’s website and credit the website with the link; each link is scored by the search engines, supporting SEO.
 
 
-
-
 ### Making an admin account
-
 Admin accounts are defined as superusers and have to be made a specific way, different to a normal GymShop customer account.
 
 To make an admin account for your local workspace:
@@ -228,7 +242,17 @@ To make an admin account for a deployed Heroku site:
   - You can then login to your admin account with this username and password to get admin privileges.
 
 ### Features left to impliment
-
+- A dynamic pop up model to explain what the site is about with a shop now button.
+- More catergory filtering, there is not many products on the site but if there was to be lots would be helpful for the user to be able to filter 
+   more easily with suggestion products.
+ - Add digital wallets for easier checkout.
+  - This would make checkout simpler and faster for the user by paying with the click of a button rather than filling out their card details into the Stripe input.
+  - However, Stripe's documentation warns that the integration of digital wallets are "currently only available in the U.S., and not yet available in the UK and euro area." Therefore, this would need to change or I would need to change online payment provider before this could be implemented.
+  - Please see the [Stripe Docs](https://stripe.com/docs/issuing/cards/digital-wallets) explaining how digital wallets can be intergrated into Stripe in the US.
+- Checkout Webhooks
+  - Adds redundancy to the order payment in case the browser is closed after the payment is confirmed but before the order form has been submitted. This would stop the chance of payment going through without the order having been created.
+  - I would follow the [Stripe documentation](https://stripe.com/docs/webhooks) on webhooks and follow Code Institute's walkthrough project in order to implement webhooks in my site.
+- Improve cart functionality 
 
 
 ## Technologies
@@ -244,6 +268,8 @@ To make an admin account for a deployed Heroku site:
 - [Gmail](https://mail.google.com/mail) was used for an STMP server to send company emails
 - [PostgreSQL](https://www.postgresql.org/) was used as the project's database management system 
 - [Am I Responsive](http://ami.responsivedesign.is/) was used to generate a mock-up image
+- [Wireframe.cc](https://wireframe.cc/pro/) was used for creating wireframes
+- [DrawSQL](https://drawsql.app/) was used for creating the database schema
 - [Dev Tools](https://en.wikipedia.org/wiki/Web_development_tools) was used for testing and responsiveness
 - [W3C HTML Validator](https://validator.w3.org/#validate_by_input+with_options) and [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) were used to check HTML and CSS files for errors
 - [pep8ish](https://pep8ish.herokuapp.com/) is Code Institute's Python Linter and was used to check Python files for errors
@@ -258,7 +284,7 @@ To make an admin account for a deployed Heroku site:
 
 To view all testing documentation, refer to [TESTING.md](TESTING.md).
 
-***
+
 ## Deployment
 
 The site was deployed to Heroku. The live link can be found [here](https://gym-shop.herokuapp.com/)

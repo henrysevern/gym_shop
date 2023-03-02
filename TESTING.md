@@ -50,8 +50,6 @@
 
 >![script.js](documentation/testing/validation/stripe_elements.js.png)
 
-### Python
-
 - All Python code was valiadated with [pep8ish](https://pep8ci.herokuapp.com//)
 
   - No errors were returned and all code met PEP8 compliance when `store/admin.py` file was passed through Code Institute's Python Linter
@@ -138,7 +136,14 @@
 
    [gym_shop/urls.py validation](documentation/testing/gym_shop.urls.py.png)
 
+
 ### Fixed Bugs
+
+- I had many bugs during deployment but this was due to environment variables not being set properly and had trouble with aws connecting.
+- I had many bugs with the implimented stripe js payment but was just passing incorrect information to the function.
+- Allauth was also not working after deployment and this was due to email settings not being set correctly and debug.
+- Fixed issue with comment body not loading correctly, this was due to crispy form tags not being declared at top of html file.
+
 
 
 ## Browser Compatibility
@@ -153,14 +158,106 @@
 
 - Website launched successfully on `Chrome`
 
-  >>![Chrome](documentation/testing/browser_compatibility/firefox.png)
-
+  >>![Chrome](documentation/testing/browser_compatibility/firefox.png
+  
 ## Responsiveness
 
+- Website viewed on a Smartphone:
+
+  >![Mobile view](documentation/testing/device_compatibility/smartphone.png)
+
+- Website viewed on a tablet device:
+
+  >![Tablet view](documentation/testing/device_compatibility/tablet.png)
+
+- Website viewed on a laptop device:
+
+ >![Desktop view](documentation/testing/device_compatibility/desktop.png)
 
 
 ## User Story Testing
 
+A target user of the GymShop website will want to:
+
+- [x] Register an account
+   >Users can register an account at GymShop, the backend of this functionality is handled by [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html).
+   >![Register](documentation/testing/user_story/register.png)
+
+- [] Store personal default delivery information
+   >Profile owners can store their default delivery information - making checkout easier as the delivery section of the order form auto-populates.
+   * This wasn't met, users are still required to enter delievry information on every new order
+
+- [x] Amend profile information
+   >Default delivery information can be updated.
+   >![Update profile](documentation/testing/user_story/update-profile.png)
+
+- [x] View past orders
+   >Profile owners will be able to view their previous order history.
+   >![Order history](documentation/features/recent_orders_card.png)
+
+- [x] Reset their profile password
+   >Profile owners will be able to reset their password via email-authentication, this functionality is handled by [django-allauth](https://django-allauth.readthedocs.io/en/latest/
+   >![Reset password](documentation/testing/user_story/password-reset.png)
+
+- [x] Navigate the site
+   >The navbar and footer make it easy for users to navigate the site as well as useful buttons and internal links throughout the website. The site is simple to navigate.
+   >![Main navbar](documentation/features/nav_bar.png)
+  
+
+- [x] View products
+   >All products can be viewed in the store.
+   >![Store](documentation/features/store.png)
+
+- [x] Filter Deilen products
+   >Products can be searched for specific keywords in the search bar.
+   >![Search](documentation/features/search.png)
+
+- [x] Purchase products
+   >Users can purchase products by adding the desired quantities to their cart and continuing with checkout to pay and finalise their order.
+   >![Add product to bag](documentation/features/payment.png)
+
+- [x] Amend their order
+   >In the cart, users will be given an overview of their proposed purchase. Users can then amend quantities of an item, remove items competely and continue shopping if they desire. 
+   >![Amend order](documentation/features/cart.png)
+
+- [x] See an order summary with all cost details
+   >An order summary is listed in the cart and again at checkout showing all costs and total cost of the purchase. There are no hidden costs. The amount that a user will be charged is clearly displayed before purchase.
+   >![Order summary](documentation/features/checkout.png)
+
+- [x] Checkout safely and securely
+   >The site uses Stripe Payments to acheive safe and secure transactions. More can be read about this at [Stripe.com](https://stripe.com/en-gb).
+   >![Stripe payment](documentation/features/stripe_confirmation.png)
+
+- [*] Receive order confirmation
+   >Once an order has been made, the user will be shown the checkout success page which informs the user that their order has been processed. Email confirmation will also be sent to the user. Additionally, if a user has a profile they will be able to see processed order in their order history on their profile.
+   * This user story was not met however users are redirected to a order complete page and are able to view their recent orders
+
+- [x] Contact GymShop
+   >Store users will need to be able to contact GymShop if they have any questions or need help with their order. The website has multiple useful links in the footer which outline company policy on returns and refunds, delivery and shipping, and privacy policy as well as an FAQ section. These links are full of customer information they may wish to read before making a purchase. If store users have any other queries or concerns, there is a contact us section where a form is submitted with a customer message.
+   >![Contact form](documentation/testing/user_story/contact-form.png)
+
+- [x] Manage their account
+   >Users are able to login, logout, register, confirm their email address, and reset their password. All of this functionality is handled by [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html).
+
+An admin of the Gymshop app will want to:
+
+- [x] Have secure access to product management
+   >Login is required to access any urls regarding product management. If the user logged in is not identified as an admin of the site, they will be redirected and thrown an error. Only admins have access to admin privileges.
+   
+- [x] Add new products
+   >Admins can easily add new products by navigating to the product management section under their account. Completing and submitting the form will result in a new product being displayed on the site.
+   >![Add product](documentation/features/add.png)
+
+- [x] Edit existing products
+   >From a product's details page, an admin can easily update the details of said product.
+   >![Admin controls](documentation/features/update.png)
+
+- [x] Delete products
+   >From a product's details page, an admin can easily delete said product. Before deletion a modal is triggered to ensure no accidental deletion.
+   >![Delete modal](documentation/features/delete.png)
+
+- [x] View all orders, products, product categories, and customer messages
+   >All of this information can be viewed when an admin logs into the customised django admin. Django provides a built in admin interface which acts as a internal management tool. More information can be read about Django admin [here](https://docs.djangoproject.com/en/4.1/ref/contrib/admin/). Gymshop's django admin can be accessed [here](https://gym-shop.herokuapp.com/admin/) (please note, admin login is required). 
 
 ## Defensive Programming Testing
 

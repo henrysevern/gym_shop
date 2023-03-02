@@ -30,8 +30,6 @@ def payment_view(request):
         cartItems = order['get_cart_items']
 
     if not request.user.is_authenticated:
-        # you'd need to create the payments/sign_up_required.html file
-        # with an <a></a> link to the sign up page
         return render(request, 'payments/sign_up_required.html')
 
     localhost = 'http://localhost:8000'
