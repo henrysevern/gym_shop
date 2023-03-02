@@ -287,9 +287,5 @@ def handle_404(request, exception):
     return render(request, '404error.html')
 
 
-def handle_404(request, exception):
-    return render(request, '404error.html')
-
-
 def handle_500(request):
     return render(request, '500error.html')
