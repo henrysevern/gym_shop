@@ -5,23 +5,51 @@ from django.views.generic import DetailView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-import json
-import stripe
 import datetime
+from django.db.models.functions import Lower
+
 from .models import *
 from .forms import CommentForm, ProductForm
 
 
 def item_list(request):
+    """ A view to render the Prodcuts """
+
     products = Product.objects.all()
     query = None
     categories = None
+    sort = None
+    direction = None
 
     if request.GET:
-        if 'category' in request.GET:
-            categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                products = products.annotate(lower_name=Lower('name'))
+            if sortkey == 'category':
+                sortkey = 'category__name'
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+
+    if 'q' in request.GET:
+        query = request.GET['q']
+        if not query:
+            messages.error(request, "You didn't enter any search criteria!")    # noqa
+            return redirect(reverse('item_list'))
+
+            queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
+            products = products.filter(queries)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -29,50 +57,27 @@ def item_list(request):
                 messages.error(request, "You didn't enter any search criteria!")    # noqa
                 return redirect(reverse('item_list'))
 
-            queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
-            products = products.filter(queries)
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,
-                                                     complete=False)
-        items = order.orderitem_set.all()
-        cart_Items = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cart_Items = order["get_cart_items"]
+    current_sorting = f'{sort}_{direction}'
 
     context = {
-        'items': items,
-        'order': order,
-        'cartItems': cart_Items,
         'products': products,
         'search_term': query,
-        'current_categories': categories
+        'current_categories': categories,
+        'current_sorting': current_sorting,
     }
+
     return render(request, "store/item_list.html", context)
 
 
 def item_view(request, product_id):
+
+    """ A view to see product details and comments"""
+
     product = get_object_or_404(Product, pk=product_id)
     comments = Comment.objects.filter(product=product, approved=True)
     form = CommentForm(request.POST or None)
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,
-                                                     complete=False)
-        items = order.orderitem_set.all()
-        cart_Items = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cart_Items = order["get_cart_items"]
 
     context = {
-        'items': items,
-        'order': order,
-        'cartItems': cart_Items,
         'product': product,
         'comments': comments,
         "form": form,
@@ -94,114 +99,6 @@ def add_comment(request, product_id):
             form.save()
             messages.success(request, "Your comment is pending approval!")
             return redirect(item_view, product_id)
-
-
-def cart(request):
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,
-                                                     complete=False)
-        items = order.orderitem_set.all()
-        cart_Items = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cart_Items = order["get_cart_items"]
-    context = {
-        'items': items,
-        'order': order,
-        'cartItems': cart_Items,
-    }
-    return render(request, "store/cart.html", context)
-
-
-@login_required()
-def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,
-                                                     complete=False)
-        order.shipping = True
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['get_cart_items']
-    context = {
-        'items': items,
-        'order': order,
-        'cartItems': cartItems,
-    }
-    return render(request, "store/checkout.html",
-                  context)
-
-
-def updateItem(request):
-    data = json.loads(request.body)
-    productId = data['productId']
-    action = data['action']
-
-    print('Action', action)
-    print('productId', productId)
-
-    customer = request.user.customer
-    product = Product.objects.get(id=productId)
-    order, created = Order.objects.get_or_create(customer=customer,
-                                                 complete=False)
-    orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                         product=product)
-
-    if action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
-    elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
-
-    orderItem.save()
-
-    if orderItem.quantity <= 0:
-        orderItem.delete()
-
-    return JsonResponse('Item was added', safe=False)
-
-
-def processOrder(request):
-    print('Data:', request.body)
-    print(request.user.customer, 'user')
-    print(request.user.email, 'email')
-    transaction_id = datetime.datetime.now().timestamp()
-    data = json.loads(request.body)
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,
-                                                     complete=False)
-        print(order, 'orderItem')
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-        order.shipping = True
-
-        # if total == order.get_cart_total:
-        #     order.complete = True
-        order.save()
-
-        print(order.shipping)
-
-        if order.shipping is True:
-            ShippingAddress.objects.create(
-                customer=customer,
-                order=order,
-                address=data['shipping']['address'],
-                city=data['shipping']['city'],
-                postcode=data['shipping']['postcode'],
-                county=data['shipping']['country'],
-
-            )
-
-    else:
-        print('User is not logged in')
-    return JsonResponse('Payment complete!', safe=False)
 
 
 @login_required()
