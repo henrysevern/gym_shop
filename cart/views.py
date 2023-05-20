@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.contrib import messages
 
-# Create your views here.
+
+from store.models import Product
+
+def view_cart(request):
+    """ A view to return the cart page """
+
+    return render(request, 'cart/cart.html')
