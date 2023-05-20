@@ -16,33 +16,38 @@
   treadmill, getting fit">
   {% endblock %}
 
-  <link rel="shortcut icon" type="img/png" href="{% static 'images/favicon.png' %}">
+  {% block extra_meta %}
+  {% endblock %}
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="img/png" href="">
+  
+  {% block corecss %}
   <!-- CSS link -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <!-- Bootstrap link -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script type="text/javascript">
-    var user = '{{request.user}}'
-    const userEmail = "{{request.user.email}}"
+  {% endblock %}
 
-    function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          // Does this cookie string begin with the name we want?
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
+  {% block extra_css %}
+  {% endblock %}
+
+  {% block corejs %}
+    <!-- Bootstap JS links -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+  </script>
+  <!-- Stripe payments -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <!-- Font awsome link -->
+  <script src="https://kit.fontawesome.com/a3c891aa8d.js" crossorigin="anonymous"></script>
   <!-- Mail chimp js link -->
   <script id="mcjs">
     ! function (c, h, i, m, p) {
@@ -50,6 +55,10 @@
     }(document, "script",
       "https://chimpstatic.com/mcjs-connected/js/users/cb88094999f9080712e316b18/1bfb80a7551071bccd18b6b04.js");
   </script>
+  {% endblock %}
+
+  {% block extra_js %}
+  {% endblock %}
 
   {% block head %}
   {% endblock head %}
@@ -111,13 +120,19 @@
             </div>
           </li>
           <li class="list-inline-item">
-            <div class="text-center">
-              <div>
-                <a href="{% url 'cart' %}">
-                  <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="cart">
+            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
+              href="{% url 'view_cart' %}">
+              <div class="text-center">
+                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                 </a>
+                <p class="my-0">
+                  {% if grand_total %}
+                      £{{ grand_total|floatformat:2 }}
+                  {% else %}
+                      $0.00
+                  {% endif %}
+              </p>
               </div>
-              <p class="my-0" id="cart-total">{{cartItems}}</p>
             </div>
           </li>
         </ul>
@@ -129,16 +144,16 @@
           aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- {% include 'includes/mobile-top-header.html' %} -->
+        {% include 'includes/mobile-top-header.html' %} 
         {% include 'includes/main-nav.html' %}
       </nav>
     </div>
     <div id="delivery-banner" class="row text-center">
-      <div class="col">
-        <h4 class="logo-font my-1">Free delivery on all orders</h4>
-        <h6 class="my-1">Only UK mainland deliveries</h6>
+      <div class="col bg-black text-white">
+        <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>
       </div>
     </div>
+</header>
   </header>
   <br>
   <div class="container">
@@ -456,8 +471,6 @@
 
   <!-- Font awsome link -->
   <script src="https://kit.fontawesome.com/a3c891aa8d.js" crossorigin="anonymous"></script>
-  <!-- JS link -->
-  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 
 </body>
 
