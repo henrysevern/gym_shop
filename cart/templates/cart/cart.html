@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+<div class="overlay"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+
+            <a  class="btn btn-outline-dark" href="{% url 'item_list' %}">&#x2190; Continue Shopping</a>
+
+            <br>
+            <br>
+            {% if cart_items %}
+            <table class="table">
+                <tr>
+                    <th><h5>Items: <strong></strong></h5></th>
+                    <th><h5><strong>£</strong></h5></th>
+                    
+                    
+                    <th>
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+                    
+                </tr>
+            </table>
+
+        </div>
+
+        <br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+				</div>
+
+                {% for item in cart_items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
+					<div style="flex:2"><p>{{item.product.title}}</p></div>
+					<div style="flex:1"><p>£{{ item.product.price | calc_subtotal:item.quantity }}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div style="flex:1">
+                            <form class="form update-form" method="POST" action="{% url 'adjust_cart' item.item_id %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="decrement-qty btn btn-sm btn-black rounded-0"
+                                                data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-minus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control form-control-sm qty_input" type="number" name="quantity"
+                                            value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}"
+                                            id="id_qty_{{ item.item_id }}">
+                                        <div class="input-group-append">
+                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-plus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <a class="update-link text-info"><small>Update</small></a>
+                            <a class="remove-item text-danger float-right"
+                                id="remove_{{ item.item_id }}"><small>Remove</small></a>
+                        </div>
+                        <h6><strong>Cart Total: ${{ total|floatformat:2 }}</strong></h6>
+                <h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
+                <h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                {% if free_delivery_delta > 0 %}
+                <p class="mb-1 text-danger">
+                    You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!
+                </p>
+                {% endif %}
+					</div>
+				</div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <p class="lead mb-5">Your Cart is empty.</p>
+            <a class="btn btn-outline-dark" href="{% url 'item_list' %}">&#x2190; Continue Shopping</a>
+            {% endif %}
+			</div>
+		</div>
+	</div>
+	<br>
+{% endblock content %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'store/includes/quantity_input.html' %}
+
+    <script type="text/javascript">
+        // Update quantity on click
+        $('.update-link').click(function(e) {
+            var form = $(this).prev('.update-form');
+            form.submit();
+        })
+    
+        // Remove item and reload on click
+        $('.remove-item').click(function(e) {
+            var csrfToken = "{{ csrf_token }}";
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var url = `/cart/remove/${itemId}/`;
+            var data = {'csrfmiddlewaretoken': csrfToken};
+    
+            $.post(url, data)
+             .done(function() {
+                 location.reload();
+             });
+        })
+    </script>
+    {% endblock %}
