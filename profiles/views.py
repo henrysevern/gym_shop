@@ -1,72 +1,47 @@
-from datetime import datetime, timedelta
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from django.views.generic import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-
-from store.models import Order
-
-from . import models
 from .models import UserProfile
 from .forms import UserProfileForm
 
+from checkout.models import Order
 
-@login_required
+
 def profile(request):
-    """
-    Display the user's profile page.
-    """
-    four_weeks_ago = timezone.now() - timedelta(days=7*4)
-
+    """ Display the user's profile. """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    # get orders in the last four weeks
-    recent_orders = Order.objects.filter(
-        date_ordered__gte=four_weeks_ago,
-        customer=request.user.customer,
-        complete=True
-    )
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully')
+
+    form = UserProfileForm(instance=profile)
+    orders = profile.orders.all()
 
     template = 'profiles/profile.html'
     context = {
-        'profile': profile,
-        'recent_orders': recent_orders
+        'form': form,
+        'orders': orders,
+        'on_profile_page': True
     }
 
     return render(request, template, context)
 
 
-def edit_profile(request, profile_id):
-    """Method to update personal profile"""
-    if not request.user.is_authenticated:
-        messages.error(request, "Sorry, no access - user only!")
-        return redirect(reverse("profile"))
+def order_history(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
 
-    profile = get_object_or_404(UserProfile, pk=profile_id)
-    if request.method == "POST":
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, f"Successfully updated your profile!")
-            return redirect(reverse("profile"), args=[profile.id])
-        else:
-            messages.error(
-                request,
-                "Failed to update profile. Please \
-                check the form and try again.",
-            )
-    else:
-        form = UserProfileForm(instance=profile)
-        # messages.info(request, f"You are editing {user.username}'s profile")
+    messages.info(request, (
+        f'This is a past confirmation for order number {order_number}. '
+        'A confirmation email was sent on the order date.'
+    ))
 
-    template = "profiles/edit_profile.html"
+    template = 'checkout/checkout_success.html'
     context = {
-        "form": form,
-        "profile": profile,
+        'order': order,
+        'from_profile': True,
     }
 
     return render(request, template, context)
