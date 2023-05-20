@@ -20,21 +20,20 @@ if os.path.exists("env.py"):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+CSRF_COOKIE_SECURE = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+SECRET_KEY = 'gkr)d$9z70$*5@l&k4@==)kwxz3wdu-dm!x0h+0tl3&=)()0-n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost']
-
-STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'    # noqa
-STRIPE_API_KEY_HIDDEN = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'    # noqa
+ALLOWED_HOSTS = ['*']
+# ['gym-shop.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -53,8 +52,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # Custom apps
+    'home',
     'store',
-    'payments',
+    'cart',
+    'checkout',
     'profiles',
     'contact',
     # Other
@@ -93,8 +94,14 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
+                'cart.contexts.cart_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
@@ -184,9 +191,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Stripe
+FREE_DELIVERY_THRESHOLD = 1000
+STANDARD_DELIVERY_PERCENTAGE = 10
+STRIPE_CURRENCY = 'gbp'
+STRIPE_PUBLIC_KEY = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'    # noqa
+STRIPE_SECRET_KEY = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'    # noqa
+STRIPE_WH_SECRET = 'whsec_lXcdVMs0ji82cNthCliJYsZwhtGLZ5R7'
+DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
 
 if 'USE_AWS' in os.environ:
 
