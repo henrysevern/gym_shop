@@ -20,21 +20,19 @@ if os.path.exists("env.py"):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = ['https://8000-henrysevern-gymshop-2y6bwb8tqg1.ws-eu97.gitpod.io']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gkr)d$9z70$*5@l&k4@==)kwxz3wdu-dm!x0h+0tl3&=)()0-n'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['*']
-# ['gym-shop.herokuapp.com', 'localhost']
-
+ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost']
 
 # Application definition
 
@@ -149,6 +147,8 @@ else:
         }
     }
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -199,9 +199,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FREE_DELIVERY_THRESHOLD = 1000
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'gbp'
-STRIPE_PUBLIC_KEY = 'pk_test_51McWY8IrnYrKmVTgpsIUXBT3UUTn1acbE4UbCkcSTTRX5Umd7ubyohuTekfdftcQhNxnKPKBJznPl3L0XYAnQrgR00xHdNs8nY'    # noqa
-STRIPE_SECRET_KEY = 'sk_test_51McWY8IrnYrKmVTgJ8EYxlCFxwIWT3Ec2KI8Lh7jD58PRQqCYmZUN9oyXH93Iicrh8GSQQNoe7p9JXZ4TiS2WsdO00nWwNasSP'    # noqa
-STRIPE_WH_SECRET = 'whsec_lXcdVMs0ji82cNthCliJYsZwhtGLZ5R7'
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
 
 if 'USE_AWS' in os.environ:
