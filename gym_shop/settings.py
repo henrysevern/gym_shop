@@ -20,7 +20,7 @@ if os.path.exists("env.py"):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-henrysevern-gymshop-2y6bwb8tqg1.ws-eu97.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-henrysevern-gymshop-2y6bwb8tqg1.ws-eu97.gitpod.io']     # noqa
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -227,8 +227,8 @@ if 'USE_AWS' in os.environ:
     MEDIAFILES_LOCATION = 'media'
 
     # Override static and media URLs in production
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    # STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 
 if 'DEVELOPMENT' in os.environ:

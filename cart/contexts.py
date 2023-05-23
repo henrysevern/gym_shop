@@ -21,9 +21,10 @@ def cart_contents(request):
         })
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
-        delivery = Decimal(total) * (Decimal(settings.STANDARD_DELIVERY_PERCENTAGE) / Decimal(100))
+        delivery = Decimal(total) * (Decimal(settings.STANDARD_DELIVERY_PERCENTAGE) / Decimal(100))     # noqa
         print("Total:", total)
-        print("STANDARD_DELIVERY_PERCENTAGE:", settings.STANDARD_DELIVERY_PERCENTAGE)
+        print("STANDARD_DELIVERY_PERCENTAGE:",
+              settings.STANDARD_DELIVERY_PERCENTAGE)
         print("Delivery:", delivery)
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
     else:
@@ -43,4 +44,3 @@ def cart_contents(request):
     }
 
     return context
-

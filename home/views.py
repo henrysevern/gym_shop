@@ -27,7 +27,7 @@ def Rate(request):
                 request,
                 "Thank you for your rating and review!",
             )
-            
+
     else:
         form = RateForm()
 
