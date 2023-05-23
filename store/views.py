@@ -40,10 +40,11 @@ def item_list(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(request, "You didn't enter any \
+                    search criteria!")
                 return redirect(reverse('item_list'))
 
-            queries = Q(title__icontains=query) | Q(description__icontains=query)
+            queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
