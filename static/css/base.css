@@ -11,6 +11,9 @@ body {
     font-family: 'Lato';
 }  
 
+.img-bg {
+    background-size: cover;
+}
 /* from Bulma */
 .icon {
     align-items: center;
@@ -223,7 +226,7 @@ a.category-badge > span.badge:hover {
     overflow-y: auto;
 }
 
-/* -------------------------------- Media Queries */
+
 
 /* -------------------------------- Media Queries */
 

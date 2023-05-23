@@ -11,76 +11,36 @@
 
 {% block content %}
 <div class="container-fluid">
- 
+
   <div class="row main-container">
-      <div id="image-container" class="col-12 col-sm-8">
-          <img class="img-fluid" src="{{ MEDIA_URL }}homepage-image.jpg" alt="Two atheletes using the ropes">
-          <div class="col-6 text-center">
-          </div>
+    <div id="image-container" class="col-12 col-sm-8">
+      <img class="img-fluid" src="{{ MEDIA_URL }}homepage-image.jpg" alt="Two atheletes using the ropes">
+      <div class="col-6 text-center">
       </div>
-      <div class="col-12 col-sm-4 flex-container">
-          <div id="offers-block" class="text-center">
-              <h2>Spring Offer:</h2>
-              <p>Free delivery on orders over £{{free_delivery_threshold}}!</p>
-              <p class="text-muted"><small>*Offer avaliable until 01/07/23.</small></p>
-              <a href="{% url 'item_list' %}">
-                <p class="btn btn-outline-dark btn-xlarge pt-2 h-100">Shop now</p>
-            </a>
-          </div>
+    </div>
+    <div class="col-12 col-sm-4 flex-container">
+      <div id="offers-block" class="text-center">
+        <h2>Spring Offer:</h2>
+        <p>Free delivery on orders over £{{free_delivery_threshold}}!</p>
+        <p class="text-muted"><small>*Offer avaliable until 01/07/23.</small></p>
+        <a href="{% url 'item_list' %}">
+          <p class="btn btn-outline-dark btn-xlarge pt-2 h-100">Shop now</p>
+        </a>
       </div>
+    </div>
   </div>
   <hr>
-  <!-- Why keep plants -->
-  <!-- <h2 class="text-center">What do you need for your gym?</h2>
-  
-  <div class="row flex-wrap"> -->
-      
-      <!-- Wellbeing -->
-      <!-- <figure class="card col-12 col-xl-4 p-3 info-card">
-          <img src="{{ MEDIA_URL }}running.jpg" alt="Woman runnning on treadmill"
-              class="img-bg img-fluid info-card-img w-100 h-50">
-          <h4
-              class="info-card-header text-center logo-font position-absolute top-50 start-50 translate-middle text-black">
-              Cardio</h4>
-          <p class="info-card-text text-center position-absolute top-50 start-50 translate-middle text-black small-screen-text">Plants
-              are great for our personal wellbeing. Research has shown time and time again that being around foliage
-              and greenery does wonders for our physical and mental health - so thank you to our photosynthesising
-              friends!</p>
-      </figure> -->
-      <!-- Air purifying -->
-      <!-- <figure class="card col-12 col-xl-4 p-3 info-card">
-          <img src="{{ MEDIA_URL }}weights.jpg" alt="stack of weights"
-              class="img.bg img-fluid info-card-img w-100 h-50">
-          <h4
-              class="info-card-header text-center logo-font position-absolute top-50 start-50 translate-middle text-black">
-              Strength</h4>
-          <p class="info-card-text text-center position-absolute top-50 start-50 translate-middle text-black small-screen-text">Plants
-              are natures natural air purifiers, it only makes sense that they'll improve air quality in your home
-              too! Houseplants have been shown to reduce levels of pollutants in the home and raise air humidity. So,
-              breathe deep! </p>
-      </figure> -->
-      <!-- Aesthetics -->
-      <!-- <figure class="card col-12 col-xl-4 p-3 info-card">
-          <img src="{{ MEDIA_URL }}yoga.jpg" alt="Yoga mat and kettle bell"
-              class="img.bg img-fluid info-card-img w-100 h-50">
-          <h4
-              class="info-card-header text-center logo-font position-absolute top-50 start-50 translate-middle text-black">
-              Home Equipment</h4>
-          <p class="info-card-text text-center position-absolute top-50 start-50 translate-middle text-black small-screen-text">A well
-              cared for and flourishing houseplant sits gorgeously in a home, breathing life into an indoor space. A
-              plant can complement any space, no matter the size or theme - we have the perfect plant for you!</p>
-      </figure>
-  </div>
-  <hr> -->
-   <div class="row pink-background">
-      <h2 class="col-12 col-md-2 text-center mt-4">Why Gym Shop?</h2>
-      <p class="col-12 col-md-10 pt-4"></p>
+  <div class="row">
+    <h2 class="col-12 col-md-2 text-center mt-4">Why Gym Shop?</h2>
+    <p class="col-12 col-md-10 pt-4">Gym shop is the one stop place to buy all your gym equipment! Whether your a gym
+      owner after exercise machines for your gym, or whether your just after a few dumbbells for your home gym, Gym Shop
+      has got all you need. You won't find better deals elsewhere. Based in Manchester, UK, we deliver nationwide so take control of our spring deals. </p>
   </div>
   <hr>
 </div>
-  <!-- <script>
+<!-- <script>
     $(document).ready(function () {  -->
-        <!-- // Info card fade and text reveal
+<!-- // Info card fade and text reveal
         $(".info-card-text").hide();
         $(".info-card").on("mouseover", function () {
             $(this).children(".info-card-header").fadeToggle().finish();
@@ -96,11 +56,3 @@
     });
   </script> -->
 {% endblock %}
-
-
-
-
-
-
-
-

@@ -35,6 +35,7 @@
 
   {% block corejs %}
   <!-- Bootstap JS links -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
@@ -83,7 +84,6 @@
         <a href="{% url 'home' %}" class="nav-link main-logo-link">
           <h2 class="logo-font text-black my-0">Gym Shop</h2>
         </a>
-        <p class="small">Give us a rating!</p>
       </div>
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
         <form method="GET" action="{% url 'item_list' %}">
@@ -163,7 +163,7 @@
       </div>
     </div>
   </header>
-  </header>
+
   <br>
   <div class="container">
     <br>
@@ -206,6 +206,7 @@
         <ul class="mt-3 footer-list">
           <li><a class="footer-text" href="#">Shop</a></li>
           <li><a class="footer-text" href="{% url 'contact' %}">Contact Us</a></li>
+          <li><a class="footer-text" href="{% url 'rate' %}">Give us a rating!</a></li>
         </ul>
       </div>
       <!-- Social Links -->

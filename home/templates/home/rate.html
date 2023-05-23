@@ -8,7 +8,7 @@
 <div class="col text-center mt-3">
     <h2 class="logo-font">Give the store a rating!</h2>
     <div class="row">
-
+        {% if request.user.is_authenticated %}
         <div class="col s12 m12 box-element">
             <div class="card horizontal">
                 <div class="card-image">
@@ -30,7 +30,7 @@
                                 <label for="textarea1"><label>
                             </div>
                             <hr>
-                            <button type="submit" name="action" class="btn btn-outline-dark"><i
+                            <button type="submit" name="action" class="btn btn-outline-warning"><i
                                     class="fas fa-star fa-lg"></i> Rate</button>
                         </form>
                         <br>
@@ -38,8 +38,12 @@
                 </div>
             </div>
         </div>
-
+        {% else %}
+        <p class="lead mb-5">You need to Register/Log in to leave a review!.</p>
+        {% endif %}
     </div>
+    <br>
+    <a class="btn btn-outline-dark" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Back Home</a>
 </div>
 <br>
 
