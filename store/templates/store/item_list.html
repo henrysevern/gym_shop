@@ -6,8 +6,7 @@
     <h2 class="logo-font">Products</h2>
     {% for c in current_categories %}
     <a class="category-badge text-decoration-none" href="{% url 'item_list' %}?category={{ c.name }}">
-        <span
-            class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
+        <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
     </a>
     {% endfor %}
     <hr class="w-50 mb-1">
@@ -31,7 +30,8 @@
                             (high to low)</option>
                         <option value="title_asc" {% if current_sorting == 'title_asc' %}selected{% endif %}>Name (A-Z)
                         </option>
-                        <option value="title_desc" {% if current_sorting == 'title_desc' %}selected{% endif %}>Name (Z-A)
+                        <option value="title_desc" {% if current_sorting == 'title_desc' %}selected{% endif %}>Name
+                            (Z-A)
                         </option>
                         <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>
                             Category (A-Z)</option>
@@ -50,59 +50,61 @@
                 </p>
             </div>
         </div>
-        <div class="row col-sm-12">
-            {% for product in products %}
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <img class="thumbnail" src="{{ product.image.url }}" alt="{{product.title}}">
-                <div class="box-element product">
-                    <h6><strong>{{product.title}}</strong></h6>
+    </div>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-2 box-element">
+            <div class="card h-100 d-flex flex-column">
+                <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.title }}">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">{{ product.title }}</h5>
                     {% if product.rating %}
-                    <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
+                    <p class="card-text"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</p>
                     {% else %}
-                    <small class="text-muted">No Rating</small>
+                    <p class="card-text">No Rating</p>
                     {% endif %}
-                    <h4 style="display: inline-block; float: right;"><strong>£{{product.price|floatformat:2}}</strong></h4>
-
-                    <a class="btn btn-outline-success" style="display: inline-block;"
-                        href="{% url 'item_view' product.id %}">View</a>
+                    <h4 class="card-price">£{{ product.price|floatformat:2 }}</h4>
+                    <a href="{% url 'item_view' product.id %}" class="btn btn-outline-success mt-auto">View</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <br>
+        {% endfor %}
     </div>
+
+    <br>
 </div>
+
 
 {% endblock content %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('.btt-link').click(function(e) {
-            window.scrollTo(0,0)
-        })
-    </script>
-    
-    <script type="text/javascript">
-        $('#sort-selector').change(function() {
-            var selector = $(this);
-            var currentUrl = new URL(window.location);
+{{ block.super }}
+<script type="text/javascript">
+    $('.btt-link').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
 
-            var selectedVal = selector.val();
-            if(selectedVal != "reset"){
-                var sort = selectedVal.split("_")[0];
-                var direction = selectedVal.split("_")[1];
+<script type="text/javascript">
+    $('#sort-selector').change(function () {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
 
-                currentUrl.searchParams.set("sort", sort);
-                currentUrl.searchParams.set("direction", direction);
+        var selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
 
-                window.location.replace(currentUrl);
-            } else {
-                currentUrl.searchParams.delete("sort");
-                currentUrl.searchParams.delete("direction");
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
 
-                window.location.replace(currentUrl);
-            }
-        })
-    </script>
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.searchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    })
+</script>
 {% endblock %}

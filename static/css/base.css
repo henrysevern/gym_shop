@@ -198,6 +198,26 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-price {
+    display: inline-block;
+    float: right;
+  }
 
 
 .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
