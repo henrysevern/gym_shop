@@ -4,6 +4,10 @@
 
 ### HTML
 
+-  - No errors where found home` when passed through the official [W3C's HTML Validator](https://validator.w3.org/nu/?doc=https://gym-shop.herokuapp.com/home).
+
+>![home.html validation](documentation/testing/validation/home.html.png)
+
 - Some errors where found in `store app` when passed through the official [W3C's HTML Validator](https://validator.w3.org/nu/?doc=https://gym-shop.herokuapp.com/) and have now been amended.
 
 >![store.html validation](documentation/testing/validation/store.html.png)
@@ -20,37 +24,39 @@
 
 >![accounts.html validation](documentation/testing/validation/accounts.html.png)
 
-- 1 error was found in `payment app` when passed through the official [W3C's HTML Validator](https://validator.w3.org/nu/?doc=https://gym-shop.herokuapp.com/payment) and has now been amended.
+ - No errors where found in `checkout app` when passed through the official [W3C's HTML Validator](https://validator.w3.org/nu/?doc=https://gym-shop.herokuapp.com/checkout).
 
->![payment.html validation](documentation/testing/validation/payment.html.png)
+>![checkout.html validation](documentation/testing/validation/checkout.html.png)
+
+ - No errors where found in `cart app` when passed through the official [W3C's HTML Validator](https://validator.w3.org/nu/?doc=https://gym-shop.herokuapp.com/cart).
+
+>![cart.html validation](documentation/testing/validation/cart.html.png)
 
 
 
 ### CSS
 
-  - 1 errors were found in any CSS files throughout the site when passed through the official CSS validator. All errors found were related to Bootstrap documentation and not from my custom CSS files. This error was fixed:
+  - 1 errors were found in any CSS files throughout the site when passed through the official CSS validator. This error was fixed:
   
 >![base.css validation](documentation/testing/validation/base.css.png)
 
-- `payment.css` was taking from stripe documentation
+- No errors found in `checkout.css` 
+
+>![checkout.css validation](documentation/testing/validation/checkout.css.png)
+
+- No errors found in `profile.css` 
+
+>![profile.css validation](documentation/testing/validation/profile.css.png)
 
 ### JavaScript
 
-- No errors were found when `cart.js` was passed through the official [JSHint](https://jshint.com/) JavaScript validator., just 3 warnings;
-
->![script.js](documentation/testing/validation/cart.js.png)
-
-- No errors were found when `checkout.js` was passed through the official [JSHint](https://jshint.com/) JavaScript validator., just 5 warnings;
-
->![script.js](documentation/testing/validation/checkout.js.png)
-
-- `payment.js` was taken from stripe documentation
+- `countryfield.js` was taking from Boutique Ado project
 
 - No errors were found when `stripe_elements.js` was passed through the official [JSHint](https://jshint.com/) JavaScript validator.
 
 >![script.js](documentation/testing/validation/stripe_elements.js.png)
 
-- All Python code was valiadated with [pep8ish](https://pep8ci.herokuapp.com//)
+- All Python code was valiadated with [pep8ish](https://pep8ccartuapp.com//)
 
   - No errors were returned and all code met PEP8 compliance when `store/admin.py` file was passed through Code Institute's Python Linter
 
@@ -94,47 +100,104 @@
 
    - No errors were returned and all code met PEP8 compliance when `profile/admin.py` file was passed through Code Institute's Python Linter
 
-   [profile/admin.py validation](documentation/testing/profile.admin.py.png)
+   [profile/admin.py validation](documentation/testing/validation/profile.admin.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `profile/forms.py` file was passed through Code Institute's Python Linter
 
-   [profile/forms.py validation](documentation/testing/profile.forms.py.png)
+   [profile/forms.py validation](documentation/testing/validation/profile.forms.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `profile/models.py` file was passed through Code Institute's Python Linter
 
-   [profile/models.py validation](documentation/testing/profile.models.py.png)
+   [profile/models.py validation](documentation/testing/validation/profile.models.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `profile/urls.py` file was passed through Code Institute's Python Linter
 
-   [profile/urls.py validation](documentation/testing/profile.urls.py.png)
+   [profile/urls.py validation](documentation/testing/validation/profile.urls.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `profile/views.py` file was passed through Code Institute's Python Linter
 
-   [profile/views.py validation](documentation/testing/profile.views.py.png)
+   [profile/views.py validation](documentation/testing/validation/profile.views.py.png)
 
-   - No errors were returned and all code met PEP8 compliance when `payment/admin.py` file was passed through Code Institute's Python Linter
+   - No errors were returned and all code met PEP8 compliance when `cart/cart_tools.py` file was passed through Code Institute's Python Linter
 
-   [payment/admin.py validation](documentation/testing/payment.admin.py.png)
+   [cart/cart_tools.py validation](documentation/testing/validation/cart.cart_tools.py.png)
+   - No errors were returned and all code met PEP8 compliance when `cart/contexts.py` file was passed through Code Institute's Python Linter
 
-   - No errors were returned and all code met PEP8 compliance when `payment/models.py` file was passed through Code Institute's Python Linter
+   [cart/contexts.py validation](documentation/testing/validation/cart.contexts.py.png)
 
-   [payment/models.py validation](documentation/testing/payment.models.py.png)
+   - No errors were returned and all code met PEP8 compliance when `cart/urls.py` file was passed through Code Institute's Python Linter
 
-   - No errors were returned and all code met PEP8 compliance when `payment/urls.py` file was passed through Code Institute's Python Linter
+   [cart/urls.py validation](documentation/testing/validation/cart.urls.py.png)
 
-   [payment/urls.py validation](documentation/testing/payment.urls.py.png)
+   - No errors were returned and all code met PEP8 compliance when `cart/views.py` file was passed through Code Institute's Python Linter
 
-   - No errors were returned and all code met PEP8 compliance when `payment/views.py` file was passed through Code Institute's Python Linter
-
-   [payment/views.py validation](documentation/testing/payment.views.py.png)
+   [cart/views.py validation](documentation/testing/validation/cart.views.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `gym_shop/settings.py` file was passed through Code Institute's Python Linter
 
-   [gym_shop/settings.py validation](documentation/testing/gym_shop.settings.py.png)
+   [gym_shop/settings.py validation](documentation/testing/validation/gym_shop.settings.py.png)
 
    - No errors were returned and all code met PEP8 compliance when `gym_shop/urls.py` file was passed through Code Institute's Python Linter
 
-   [gym_shop/urls.py validation](documentation/testing/gym_shop.urls.py.png)
+   [gym_shop/urls.py validation](documentation/testing/validation/gym_shop.urls.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `home/admin.py` file was passed through Code Institute's Python Linter
+
+   [home/admin.py validation](documentation/testing/validation/home.admin.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `home/forms.py` file was passed through Code Institute's Python Linter
+
+   [home/forms.py validation](documentation/testing/validation/home.forms.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `home/models.py` file was passed through Code Institute's Python Linter
+
+   [home/models.py validation](documentation/testing/validation/home.models.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `home/views.py` file was passed through Code Institute's Python Linter
+
+   [home/views.py validation](documentation/testing/validation/home.views.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `home/urls.py` file was passed through Code Institute's Python Linter
+
+   [home/urls.py validation](documentation/testing/validation/home.urls.py.png)
+   
+   - No errors were returned and all code met PEP8 compliance when `checkout/admin.py` file was passed through Code Institute's Python Linter
+
+    [checkout/admin.py validation](documentation/testing/validation/checkout.admin.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/apps.py` file was passed through Code Institute's Python Linter
+
+    [checkout/apps.py validation](documentation/testing/validation/checkout.apps.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/forms.py` file was passed through Code Institute's Python Linter
+
+    [checkout/forms.py validation](documentation/testing/validation/checkout.forms.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/models.py` file was passed through Code Institute's Python Linter
+
+    [checkout/models.py validation](documentation/testing/validation/checkout.models.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/signals.py` file was passed through Code Institute's Python Linter
+
+    [checkout/signals.py validation](documentation/testing/validation/checkout.signals.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/urls.py` file was passed through Code Institute's Python Linter
+
+    [checkout/urls.py validation](documentation/testing/validation/checkout.urls.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/views.py` file was passed through Code Institute's Python Linter
+
+    [checkout/views.py validation](documentation/testing/validation/checkout.views.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/webhooks.py` file was passed through Code Institute's Python Linter
+
+    [checkout/webhooks.py validation](documentation/testing/validation/checkout.webhooks.py.png)
+
+   - No errors were returned and all code met PEP8 compliance when `checkout/webhook_handler.py` file was passed through Code Institute's Python Linter
+
+    [checkout/webhook_handler.py validation](documentation/testing/validation/checkout.webhook_handler.py.png)
+
+
 
 
 ### Fixed Bugs

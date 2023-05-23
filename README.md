@@ -70,12 +70,6 @@ To visit the website, please visit the deployed site [here](https://gym-shop.her
  ![Database](documentation/database_model/database.png)
 
 
-## OUTSTANDING BUG
-*** Please read ***
-- When user signs up there is an error when the button is pressed saying the user has no customer. This is because ive tried to develop a customer model where anonymous users can checkout and pay, I built my app of that and then was going to impliment user log in. If you use the superuser to create a customer for the user then the functionality works fine.
-- For quick fix I could have implimented a quick form during sign up to populate the customer model with the users information. The models and views need adjusting to aloow for both logged in users and anonymous users to checkout and pay. I ran out of project time to impliment this.
-
-
 ## Features 
 
 ### Existing Features 
@@ -94,6 +88,11 @@ __Footer__
 - The footer design matches that of the header to give a cohesive feel to the website.
 ![Footer](documentation/features/footer.png)
 
+__Homepage__
+- The home page is where the users first come to when they land on the website.
+- There is information anout the site here and well as pop up to sign up to a news news letter.
+![Home](documentation/features/home.png)
+
 __Store__
 - The store displays the products that the user is able to buy through the website.
 - Each product has its own info card where the user can see to which category the product belongs, price and rating.
@@ -104,6 +103,10 @@ __Product Details__
 - From this page, users can add the product to basket.
 ![Product details](documentation/features/detail.png)
 
+__Toasts__
+- Several toasts and notifications are shown when a user engages with the site.
+- This is to the user of there activity on the site.
+![Toasts](documentation/features/toasts.png)
 
 __Comments__
 - In the product detail page each product has a review section.
@@ -127,21 +130,16 @@ __The cart__
 __Checkout__
 
 - Once product(s) have been added to the cart the user will then be able to checkout. Upon checkout there is a brief review of the users basket i.e., what they intend to purchase. The user will then be required to fill out their delivery information to then proceed to fill out their payment information.
-
-![Checkout](documentation/features/checkout.png)
-
-__Payment__
-
 - The user will then be required to fill out their payment information. Once payment is completed the order is made.
 
-![Payment](documentation/features/payment.png)
+![Checkout](documentation/features/checkout.png)
 
 
 __Order Confirmation__
 
 - Once payment has been processed and an order created, a user will be directed to an order confirmation page listing their order details and a button to redirect back to the store. Additionally, there will be a toast alerting the user of their order success and a confirmation email will be sent to the email adress the customer provided.
 
-![Payment Confirm](documentation/features/payment_confirm.png)
+![Payment](documentation/features/payment.png)
 
 ![Stripe Confirm](documentation/features/stripe_confirmation.png)
 
@@ -162,7 +160,6 @@ __Profile__
 
 ![Details Card](documentation/features/details_card.png)
 
-![Recent Orders](documentation/features/recent_orders_card.png)
 
 
 ### Admin Features
