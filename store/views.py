@@ -13,7 +13,7 @@ from .forms import CommentForm, ProductForm
 
 
 def item_list(request):
-    """ A view to render the Prodcuts """
+    """A view to render the Products"""
 
     products = Product.objects.all()
     query = None
@@ -25,37 +25,26 @@ def item_list(request):
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
-            if sortkey == 'title':
-                sortkey = 'lower_title'
-                products = products.annotate(lower_title=Lower('title'))
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
                 direction = request.GET['direction']
-                if direction == 'desc':
-                    sortkey = f'-{sortkey}'
+            if direction == 'desc':
+                sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
 
-            if 'direction' in request.GET:
-                direction = request.GET['direction']
-                if direction == 'desc':
-                    sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
-
-    if 'q' in request.GET:
-        query = request.GET['q']
-        if not query:
-            messages.error(request, "You didn't enter any search criteria!")    # noqa
-            return redirect(reverse('item_list'))
-
-            queries = Q(title__icontains=query) | Q(description__icontains=query)    # noqa
-            products = products.filter(queries)
+        if 'category' in request.GET:
+            categories = request.GET.getlist('category')
+            products = products.filter(category__name__in=categories)
 
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")    # noqa
+                messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('item_list'))
+
+            queries = Q(title__icontains=query) | Q(description__icontains=query)
+            products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
 

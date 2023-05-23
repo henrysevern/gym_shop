@@ -5,8 +5,8 @@
 <div class="overlay"></div>
 <div class="col text-center mt-3">
     <h2 class="logo-font">Products</h2>
-    {% for c in current_categories %}
-    <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
+    {% for c in categories %}
+    <a class="category-badge text-decoration-none" href="{% url 'item_list' %}?category={{ c.name }}">
         <span
             class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
     </a>
@@ -31,9 +31,9 @@
                         (low to high)</option>
                     <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating
                         (high to low)</option>
-                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)
+                    <option value="title_asc" {% if current_sorting == 'title_asc' %}selected{% endif %}>Name (A-Z)
                     </option>
-                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)
+                    <option value="title_desc" {% if current_sorting == 'title_desc' %}selected{% endif %}>Name (Z-A)
                     </option>
                     <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>
                         Category (A-Z)</option>

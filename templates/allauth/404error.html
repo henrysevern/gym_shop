@@ -1,4 +1,4 @@
-{% extends 'store/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -6,7 +6,7 @@
     <!-- Image -->
     <div class="row main-container text-center">
         <div id="image-container" class="col-12">
-            <img class="img-fluid large-error-img" src="{% static  'images/empty_gym' %}" alt="empty_gym">
+            <img class="img-fluid large-error-img" src="{{ MEDIA_URL }}empty_gym.jpg" alt="empty_gym">
         </div>
     </div>
     <!-- Message -->
