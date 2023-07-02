@@ -29,10 +29,9 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-henrysevern-gymshop-2y6bwb8tqg1.ws-eu97.gi
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# 'DEVELOPMENT' in os.environ
+DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['gym-shop.herokuapp.com', 'localhost', '*']
 
 # Application definition
 
@@ -203,7 +202,7 @@ STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
-DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+DEFAULT_FROM_EMAIL = 'gym_shop@example.com'
 
 if 'USE_AWS' in os.environ:
 
