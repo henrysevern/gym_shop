@@ -16,10 +16,10 @@
                 Cardio
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="cardio-link">
-                <a href="{% url 'item_list' %}?category=Cardio Machines" class="dropdown-item">Cardio Machines</a>
-                <a href="{% url 'item_list' %}?category=Cross Trainers" class="dropdown-item">Cross Trainers</a>
-                <a href="{% url 'item_list' %}?category=Functional Fitness" class="dropdown-item">Functional Fitness</a>
-                <a href="{% url 'item_list' %}?category=Sports Equipment" class="dropdown-item">Sports Equipment</a>
+                <a href="{% url 'item_list' %}?category={{ 'Cardio Machines' | urlencode }}" class="dropdown-item">Cardio Machines</a>
+                <a href="{% url 'item_list' %}?category={{ 'Cross Trainers' | urlencode }}" class="dropdown-item">Cross Trainers</a>
+                <a href="{% url 'item_list' %}?category={{ 'Functional Fitness' | urlencode }}" class="dropdown-item">Functional Fitness</a>
+                <a href="{% url 'item_list' %}?category={{ 'Sports Equipment' | urlencode }}" class="dropdown-item">Sports Equipment</a>
             </div>
         </li>
 
@@ -41,9 +41,9 @@
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
                 <a href="{% url 'item_list' %}?category=Accessories" class="dropdown-item">Accessories</a>
-                <a href="{% url 'item_list' %}?category=Yoga mats" class="dropdown-item">Yoga mats</a>
-                <a href="{% url 'item_list' %}?category=Resistance Bands" class="dropdown-item">Resistance Bands</a>
-                <a href="{% url 'item_list' %}?category=Home Gym" class="dropdown-item">Home Gym</a>
+                <a href="{% url 'item_list' %}?category={{ 'Yoga mats' | urlencode }}" class="dropdown-item">Yoga mats</a>
+                <a href="{% url 'item_list' %}?category={{ 'Resistance Bands' | urlencode }}" class="dropdown-item">Resistance Bands</a>
+                <a href="{% url 'item_list' %}?category={{ 'Home Gym' | urlencode }}" class="dropdown-item">Home Gym</a>
             </div>
         </li>
     </ul>

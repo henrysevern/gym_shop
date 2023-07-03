@@ -104,8 +104,8 @@
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
         <ul class="list-inline list-unstyled text-center text-lg-right my-0">
           <li class="list-inline-item dropdown">
-            <div class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+            <div class="text-black nav-link" id="user-options" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" role="navigation">
               <div class="text-center">
                 <div><i class="fas fa-user fa-lg"></i></div>
                 {% if request.user.is_authenticated %}
@@ -133,6 +133,7 @@
               href="{% url 'view_cart' %}">
               <div class="text-center">
                 <div><i class="fas fa-shopping-cart fa-lg"></i></div>
+              </div>
             </a>
             <p class="my-0">
               {% if grand_total %}
@@ -141,11 +142,9 @@
               £0.00
               {% endif %}
             </p>
+          </li>
+        </ul>
       </div>
-    </div>
-    </li>
-    </ul>
-    </div>
     </div>
     <div>
       <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -486,7 +485,7 @@
   {% endif %}
 
   {% block postloadjs %}
-  <script type="text/javascript">
+  <script>
     $('.toast').toast('show');
   </script>
   {% endblock %}
