@@ -206,6 +206,7 @@
 - I had many bugs with the implimented stripe js payment but was just passing incorrect information to the function.
 - Allauth was also not working after deployment and this was due to email settings not being set correctly and debug.
 - Fixed issue with comment body not loading correctly, this was due to crispy form tags not being declared at top of html file.
+- Bug where order confirmation grand total and delivery was showing as £0, this was due to duplicate signals with the same name.
 
 
 
@@ -221,7 +222,7 @@
 
 - Website launched successfully on `Chrome`
 
-  >>![Chrome](documentation/testing/browser_compatibility/firefox.png
+  >>![Chrome](documentation/testing/browser_compatibility/firefox.png)
   
 ## Responsiveness
 
@@ -246,9 +247,8 @@ A target user of the GymShop website will want to:
    >Users can register an account at GymShop, the backend of this functionality is handled by [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html).
    >![Register](documentation/testing/user_story/register.png)
 
-- [] Store personal default delivery information
+- [x] Store personal default delivery information
    >Profile owners can store their default delivery information - making checkout easier as the delivery section of the order form auto-populates.
-   * This wasn't met, users are still required to enter delievry information on every new order
 
 - [x] Amend profile information
    >Default delivery information can be updated.
@@ -293,7 +293,6 @@ A target user of the GymShop website will want to:
 
 - [*] Receive order confirmation
    >Once an order has been made, the user will be shown the checkout success page which informs the user that their order has been processed. Email confirmation will also be sent to the user. Additionally, if a user has a profile they will be able to see processed order in their order history on their profile.
-   * This user story was not met however users are redirected to a order complete page and are able to view their recent orders
 
 - [x] Contact GymShop
    >Store users will need to be able to contact GymShop if they have any questions or need help with their order. The website has multiple useful links in the footer which outline company policy on returns and refunds, delivery and shipping, and privacy policy as well as an FAQ section. These links are full of customer information they may wish to read before making a purchase. If store users have any other queries or concerns, there is a contact us section where a form is submitted with a customer message.

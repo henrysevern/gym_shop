@@ -4,7 +4,7 @@ This website is a full stack ecommerce store to allow people/gyms to buy commerc
 
 To visit the website, please visit the deployed site [here](https://gym-shop.herokuapp.com/).
 
-![Responsive Mockup](documentation/features/logo.png)
+![Responsive Mockup](documentation/features/mockup.png)
 
 
 
