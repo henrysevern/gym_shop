@@ -1,12 +1,11 @@
-
 {% load static %}
-<div class="collapse navbar-collapse" id="main-nav">
+<div class="nav-bar collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'item_list' %}" id="all-products-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Products
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+            <div class="dropdown-menu border-1" aria-labelledby="all-products-link">
                 <a href="{% url 'item_list' %}" class="dropdown-item">All Products</a>
             </div>
         </li>
@@ -15,7 +14,7 @@
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="cardio-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Cardio
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="cardio-link">
+            <div class="dropdown-menu border-1" aria-labelledby="cardio-link">
                 <a href="{% url 'item_list' %}?category={{ 'Cardio Machines' | urlencode }}" class="dropdown-item">Cardio Machines</a>
                 <a href="{% url 'item_list' %}?category={{ 'Cross Trainers' | urlencode }}" class="dropdown-item">Cross Trainers</a>
                 <a href="{% url 'item_list' %}?category={{ 'Functional Fitness' | urlencode }}" class="dropdown-item">Functional Fitness</a>
@@ -27,7 +26,7 @@
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="strength-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Strength
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="strength-link">
+            <div class="dropdown-menu border-1" aria-labelledby="strength-link">
                 <a href="{% url 'item_list' %}?category=Benches" class="dropdown-item">Benches</a>
                 <a href="{% url 'item_list' %}?category=Dumbbells" class="dropdown-item">Dumbbells</a>
                 <a href="{% url 'item_list' %}?category=Weight_Machines" class="dropdown-item">Weight Machines</a>
@@ -39,7 +38,7 @@
             <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Home Gym
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="specials-link">
+            <div class="dropdown-menu border-1" aria-labelledby="specials-link">
                 <a href="{% url 'item_list' %}?category=Accessories" class="dropdown-item">Accessories</a>
                 <a href="{% url 'item_list' %}?category={{ 'Yoga mats' | urlencode }}" class="dropdown-item">Yoga mats</a>
                 <a href="{% url 'item_list' %}?category={{ 'Resistance Bands' | urlencode }}" class="dropdown-item">Resistance Bands</a>
