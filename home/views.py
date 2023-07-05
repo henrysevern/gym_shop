@@ -22,11 +22,11 @@ def Rate(request):
             rate = form.save(commit=False)
             rate.user = user
             rate.save()
-            return HttpResponseRedirect(reverse('home'))
             messages.success(
                 request,
                 "Thank you for your rating and review!",
             )
+            return HttpResponseRedirect(reverse('home'))
 
     else:
         form = RateForm()
